@@ -6,17 +6,17 @@ edition = "2018"
 description = "Bindings to the ARB library"
 homepage = "https://github.com/wyoumansUSF/arb-sys"
 repository = "https://github.com/wyoumansUSF/arb-sys"
-documentation = "https://doc.rs/arb-sys"
 license = "MIT OR Apache-2.0" 
 keywords = ["arb", "real", "complex", "number-theory", "math"]
-categories = ["algorithms", "external-ffi-bindings"]
+categories = ["algorithms", "external-ffi-bindings", "mathematics"]
 readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 libc = "0.2"
-flint-sys = { path = "../flint-sys" }
+flint-sys = "0.1"
+#flint-sys = { path = "../flint-sys" }
 
 [dev-dependencies]
 quickcheck = "1.0"
