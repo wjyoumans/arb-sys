@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! See the [ARB documentation](https://arblib.org/).
+//! *See the [ARB documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
