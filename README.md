@@ -12,4 +12,4 @@ Most of Arb is covered, however some functions require `*mut` where `*const` wil
 
 This crate requires the Arb library to be installed:
 
-  * [Arb](https://arblib.org) (version 2.21 recommended)
+  * [Arb](https://arblib.org) (version >= 2.21 recommended)
