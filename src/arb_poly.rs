@@ -1,12 +1,15 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
+use flint_sys::fmpz_poly::fmpz_poly_struct;
+use flint_sys::fmpq_poly::fmpq_poly_struct;
+use crate::mag::mag_struct;
+use crate::arf::arf_struct;
+use crate::acb::{acb_struct, acb_srcptr};
+use crate::arb::{arb_struct, arb_ptr, arb_srcptr};
 use libc::{c_int, FILE};
 
 

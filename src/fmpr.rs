@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
@@ -10,7 +10,7 @@ use libc::c_int;
 
 
 #[repr(C)]
-#[derive(Debug, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub struct fmpr_struct {
     pub man: fmpz,
     pub exp: fmpz,

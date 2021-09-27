@@ -1,12 +1,10 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
+use flint_sys::ulong_extras::n_factor_t;
+use flint_sys::nmod_vec::nmod_t;
 use libc::{c_uint, c_int};
 
 
@@ -126,7 +124,10 @@ pub union dlog_precomp_struct__bindgen_ty_1 {
     pub modpe: dlog_modpe_t,
     pub order23: dlog_order23_t,
 }
+
 pub type dlog_precomp_t = [dlog_precomp_struct; 1usize];
+
+extern "C" {
     pub fn apow_cmp(x: *const apow_t, y: *const apow_t) -> c_int;
     pub fn dlog_precomp_modpe_init(
         pre: *mut dlog_precomp_struct,

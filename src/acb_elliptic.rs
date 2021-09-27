@@ -1,27 +1,19 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
-use libc::{c_char, c_int, FILE};
-
+use crate::acb::{acb_struct, acb_ptr, acb_srcptr};
+use crate::acb_poly::acb_poly_struct;
 
 extern "C" {
     pub fn acb_elliptic_k(k: *mut acb_struct, m: *mut acb_struct, prec: mp_limb_signed_t);
-}
-extern "C" {
     pub fn acb_elliptic_k_jet(
         w: acb_ptr,
         m: *mut acb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn _acb_elliptic_k_series(
         res: acb_ptr,
         m: acb_srcptr,
@@ -29,19 +21,13 @@ extern "C" {
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_k_series(
         res: *mut acb_poly_struct,
         m: *mut acb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_e(res: *mut acb_struct, m: *mut acb_struct, prec: mp_limb_signed_t);
-}
-extern "C" {
     pub fn acb_elliptic_rf(
         res: *mut acb_struct,
         x: *mut acb_struct,
@@ -50,8 +36,6 @@ extern "C" {
         flags: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_rj(
         res: *mut acb_struct,
         x: *mut acb_struct,
@@ -61,8 +45,6 @@ extern "C" {
         flags: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_rj_carlson(
         res: *mut acb_struct,
         x: *mut acb_struct,
@@ -72,8 +54,6 @@ extern "C" {
         flags: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_rj_integration(
         res: *mut acb_struct,
         x: *mut acb_struct,
@@ -83,8 +63,6 @@ extern "C" {
         flags: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_rg(
         res: *mut acb_struct,
         x: *mut acb_struct,
@@ -93,11 +71,7 @@ extern "C" {
         flags: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_rc1(res: *mut acb_struct, x: *mut acb_struct, prec: mp_limb_signed_t);
-}
-extern "C" {
     pub fn acb_elliptic_f(
         res: *mut acb_struct,
         phi: *mut acb_struct,
@@ -105,8 +79,6 @@ extern "C" {
         times_pi: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_e_inc(
         res: *mut acb_struct,
         phi: *mut acb_struct,
@@ -114,16 +86,12 @@ extern "C" {
         times_pi: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_pi(
         r: *mut acb_struct,
         n: *mut acb_struct,
         m: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_pi_inc(
         res: *mut acb_struct,
         n: *mut acb_struct,
@@ -132,24 +100,18 @@ extern "C" {
         times_pi: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_p(
         r: *mut acb_struct,
         z: *mut acb_struct,
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_p_prime(
         r: *mut acb_struct,
         z: *mut acb_struct,
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_p_jet(
         r: acb_ptr,
         z: *mut acb_struct,
@@ -157,8 +119,6 @@ extern "C" {
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn _acb_elliptic_p_series(
         res: acb_ptr,
         z: acb_srcptr,
@@ -167,8 +127,6 @@ extern "C" {
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_p_series(
         res: *mut acb_poly_struct,
         z: *mut acb_poly_struct,
@@ -176,24 +134,18 @@ extern "C" {
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_zeta(
         res: *mut acb_struct,
         z: *mut acb_struct,
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_sigma(
         res: *mut acb_struct,
         z: *mut acb_struct,
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_roots(
         e1: *mut acb_struct,
         e2: *mut acb_struct,
@@ -201,16 +153,12 @@ extern "C" {
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_invariants(
         g2: *mut acb_struct,
         g3: *mut acb_struct,
         tau: *mut acb_struct,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn acb_elliptic_inv_p(
         res: *mut acb_struct,
         z: *mut acb_struct,

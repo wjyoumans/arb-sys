@@ -1,13 +1,12 @@
 #![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
-use libc::{c_char, c_int, FILE};
+use flint_sys::fmpz_poly::fmpz_poly_t;
+use crate::arb::arb_struct;
+use crate::mag::{mag_struct, mag_t};
 
 
 #[repr(C)]
@@ -24,24 +23,18 @@ pub struct hypgeom_struct {
     pub boundK: mp_limb_signed_t,
     pub MK: mag_t,
 }
+
 pub type hypgeom_t = [hypgeom_struct; 1usize];
+
 extern "C" {
     pub fn hypgeom_init(hyp: *mut hypgeom_struct);
-}
-extern "C" {
     pub fn hypgeom_clear(hyp: *mut hypgeom_struct);
-}
-extern "C" {
     pub fn hypgeom_precompute(hyp: *mut hypgeom_struct);
-}
-extern "C" {
     pub fn hypgeom_estimate_terms(
         z: *mut mag_struct,
         r: ::std::os::raw::c_int,
         prec: mp_limb_signed_t,
     ) -> mp_limb_signed_t;
-}
-extern "C" {
     pub fn hypgeom_bound(
         error: *mut mag_struct,
         r: ::std::os::raw::c_int,
@@ -52,8 +45,6 @@ extern "C" {
         z: *mut mag_struct,
         prec: mp_limb_signed_t,
     ) -> mp_limb_signed_t;
-}
-extern "C" {
     pub fn arb_hypgeom_sum(
         P: *mut arb_struct,
         Q: *mut arb_struct,
@@ -61,8 +52,6 @@ extern "C" {
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-}
-extern "C" {
     pub fn arb_hypgeom_infsum(
         P: *mut arb_struct,
         Q: *mut arb_struct,

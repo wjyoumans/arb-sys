@@ -1,16 +1,17 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
-use libc::{c_char, c_int, FILE};
+use libc::{c_int, c_void};
+use crate::mag::mag_struct;
+use crate::arf::arf_struct;
+use crate::arb::arb_struct;
+use crate::acb::{acb_struct, acb_ptr};
 
 
 pub type acb_calc_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
         out: acb_ptr,
         inp: *mut acb_struct,
         param: *mut c_void,

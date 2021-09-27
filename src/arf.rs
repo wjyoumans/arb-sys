@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
@@ -34,7 +34,7 @@ pub union mantissa_struct {
 
 
 #[repr(C)]
-#[derive(Clone)]
+#[derive(Copy, Clone)]
 pub struct arf_struct {
     pub exp: fmpz,
     pub size: mp_size_t,

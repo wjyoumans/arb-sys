@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
@@ -13,7 +13,7 @@ use libc::{c_int, FILE};
 
 
 #[repr(C)]
-#[derive(Clone)]
+#[derive(Copy, Clone)]
 pub struct acb_struct {
     pub real: arb_struct,
     pub imag: arb_struct,

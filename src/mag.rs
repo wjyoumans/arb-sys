@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
@@ -11,7 +11,7 @@ use libc::{c_char, c_int, FILE};
 
 
 #[repr(C)]
-#[derive(Debug, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub struct mag_struct {
     pub exp: fmpz,
     pub man: mp_limb_t,

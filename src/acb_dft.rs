@@ -1,13 +1,13 @@
 #![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
 
-//! *See the [ARB documentation](https://arblib.org/).
+//! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
-use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
-use libc::{c_char, c_int, FILE};
+use flint_sys::ulong_extras::n_factor_t;
+use flint_sys::nmod_vec::nmod_t;
+use crate::acb::{acb_ptr, acb_srcptr};
+use libc::c_int;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
