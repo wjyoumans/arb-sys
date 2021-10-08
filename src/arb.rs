@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-//! *See the [Arb documentation](https://arblib.org/).
+//! See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
@@ -27,39 +27,39 @@ extern "C" {
     pub fn arb_clear(x: *mut arb_struct);
     pub fn _arb_vec_init(n: mp_limb_signed_t) -> arb_ptr;
     pub fn _arb_vec_clear(v: arb_ptr, n: mp_limb_signed_t);
-    pub fn arb_mid_ptr(z: *mut arb_struct) -> arf_ptr;
-    pub fn arb_rad_ptr(z: *mut arb_struct) -> mag_ptr;
-    pub fn arb_is_exact(x: *mut arb_struct) -> c_int;
-    pub fn arb_equal(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_equal_si(x: *mut arb_struct, y: mp_limb_signed_t) -> c_int;
-    pub fn arb_eq(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_ne(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_lt(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_le(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_gt(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_ge(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
+    pub fn arb_mid_ptr(z: *const arb_struct) -> arf_ptr;
+    pub fn arb_rad_ptr(z: *const arb_struct) -> mag_ptr;
+    pub fn arb_is_exact(x: *const arb_struct) -> c_int;
+    pub fn arb_equal(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_equal_si(x: *const arb_struct, y: mp_limb_signed_t) -> c_int;
+    pub fn arb_eq(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_ne(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_lt(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_le(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_gt(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_ge(x: *const arb_struct, y: *const arb_struct) -> c_int;
     pub fn arb_zero(x: *mut arb_struct);
-    pub fn arb_is_zero(x: *mut arb_struct) -> c_int;
+    pub fn arb_is_zero(x: *const arb_struct) -> c_int;
     pub fn arb_pos_inf(x: *mut arb_struct);
     pub fn arb_neg_inf(x: *mut arb_struct);
     pub fn arb_zero_pm_inf(x: *mut arb_struct);
     pub fn arb_zero_pm_one(x: *mut arb_struct);
     pub fn arb_unit_interval(x: *mut arb_struct);
     pub fn arb_indeterminate(x: *mut arb_struct);
-    pub fn arb_is_finite(x: *mut arb_struct) -> c_int;
-    pub fn arb_set(x: *mut arb_struct, y: *mut arb_struct);
+    pub fn arb_is_finite(x: *const arb_struct) -> c_int;
+    pub fn arb_set(x: *mut arb_struct, y: *const arb_struct);
     pub fn arb_swap(x: *mut arb_struct, y: *mut arb_struct);
-    pub fn arb_set_round(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_trim(y: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_neg(y: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_neg_round(x: *mut arb_struct, y: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_abs(y: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_sgn(res: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_sgn_nonzero(x: *mut arb_struct) -> c_int;
+    pub fn arb_set_round(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_trim(y: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_neg(y: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_neg_round(x: *mut arb_struct, y: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_abs(y: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_sgn(res: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_sgn_nonzero(x: *const arb_struct) -> c_int;
     pub fn _arb_digits_round_inplace(
         s: *mut c_char,
-        shift: *mut mp_limb_t,
-        error: *mut fmpz,
+        shift: *const mp_limb_t,
+        error: *const fmpz,
         n: mp_limb_signed_t,
         rnd: c_int,
     );
@@ -69,341 +69,341 @@ extern "C" {
         prec: mp_limb_signed_t,
     ) -> c_int;
     pub fn arb_get_str(
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_signed_t,
         flags: mp_limb_t,
     ) -> *mut c_char;
-    pub fn arb_set_arf(x: *mut arb_struct, y: *mut arf_struct);
+    pub fn arb_set_arf(x: *mut arb_struct, y: *const arf_struct);
     pub fn arb_set_si(x: *mut arb_struct, y: mp_limb_signed_t);
     pub fn arb_set_ui(x: *mut arb_struct, y: mp_limb_t);
     pub fn arb_set_d(x: *mut arb_struct, y: f64);
-    pub fn arb_set_fmpz(x: *mut arb_struct, y: *mut fmpz);
-    pub fn arb_set_fmpz_2exp(x: *mut arb_struct, y: *mut fmpz, exp: *mut fmpz);
+    pub fn arb_set_fmpz(x: *mut arb_struct, y: *const fmpz);
+    pub fn arb_set_fmpz_2exp(x: *mut arb_struct, y: *const fmpz, exp: *const fmpz);
     pub fn arb_set_round_fmpz_2exp(
         y: *mut arb_struct,
-        x: *mut fmpz,
-        exp: *mut fmpz,
+        x: *const fmpz,
+        exp: *const fmpz,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_set_round_fmpz(y: *mut arb_struct, x: *mut fmpz, prec: mp_limb_signed_t);
-    pub fn arb_is_one(f: *mut arb_struct) -> c_int;
+    pub fn arb_set_round_fmpz(y: *mut arb_struct, x: *const fmpz, prec: mp_limb_signed_t);
+    pub fn arb_is_one(f: *const arb_struct) -> c_int;
     pub fn arb_one(f: *mut arb_struct);
-    pub fn arb_fprint(file: *mut FILE, x: *mut arb_struct);
-    pub fn arb_fprintd(file: *mut FILE, x: *mut arb_struct, digits: mp_limb_signed_t);
+    pub fn arb_fprint(file: *mut FILE, x: *const arb_struct);
+    pub fn arb_fprintd(file: *mut FILE, x: *const arb_struct, digits: mp_limb_signed_t);
     pub fn arb_fprintn(
         file: *mut FILE,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         digits: mp_limb_signed_t,
         flags: mp_limb_t,
     );
-    pub fn arb_print(x: *mut arb_struct);
-    pub fn arb_printd(x: *mut arb_struct, digits: mp_limb_signed_t);
-    pub fn arb_printn(x: *mut arb_struct, digits: mp_limb_signed_t, flags: mp_limb_t);
-    pub fn arb_mul_2exp_si(y: *mut arb_struct, x: *mut arb_struct, e: mp_limb_signed_t);
-    pub fn arb_mul_2exp_fmpz(y: *mut arb_struct, x: *mut arb_struct, e: *mut fmpz);
-    pub fn arb_is_int(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_int_2exp_si(x: *mut arb_struct, e: mp_limb_signed_t) -> c_int;
-    pub fn arb_contains_zero(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_nonzero(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_positive(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_nonnegative(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_negative(x: *mut arb_struct) -> c_int;
-    pub fn arb_is_nonpositive(x: *mut arb_struct) -> c_int;
-    pub fn arb_contains_negative(x: *mut arb_struct) -> c_int;
-    pub fn arb_contains_nonpositive(x: *mut arb_struct) -> c_int;
-    pub fn arb_contains_positive(x: *mut arb_struct) -> c_int;
-    pub fn arb_contains_nonnegative(x: *mut arb_struct) -> c_int;
-    pub fn arb_get_mag_lower(z: *mut mag_struct, x: *mut arb_struct);
-    pub fn arb_get_mag_lower_nonnegative(z: *mut mag_struct, x: *mut arb_struct);
-    pub fn arb_get_mag(z: *mut mag_struct, x: *mut arb_struct);
-    pub fn arb_get_mid_arb(z: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_get_rad_arb(z: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_get_abs_ubound_arf(u: *mut arf_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_get_abs_lbound_arf(u: *mut arf_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_get_ubound_arf(u: *mut arf_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_get_lbound_arf(u: *mut arf_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_nonnegative_part(res: *mut arb_struct, x: *mut arb_struct);
-    pub fn arb_rel_error_bits(x: *mut arb_struct) -> mp_limb_signed_t;
-    pub fn arb_rel_accuracy_bits(x: *mut arb_struct) -> mp_limb_signed_t;
-    pub fn arb_rel_one_accuracy_bits(x: *mut arb_struct) -> mp_limb_signed_t;
-    pub fn arb_bits(x: *mut arb_struct) -> mp_limb_signed_t;
+    pub fn arb_print(x: *const arb_struct);
+    pub fn arb_printd(x: *const arb_struct, digits: mp_limb_signed_t);
+    pub fn arb_printn(x: *const arb_struct, digits: mp_limb_signed_t, flags: mp_limb_t);
+    pub fn arb_mul_2exp_si(y: *mut arb_struct, x: *const arb_struct, e: mp_limb_signed_t);
+    pub fn arb_mul_2exp_fmpz(y: *mut arb_struct, x: *const arb_struct, e: *const fmpz);
+    pub fn arb_is_int(x: *const arb_struct) -> c_int;
+    pub fn arb_is_int_2exp_si(x: *const arb_struct, e: mp_limb_signed_t) -> c_int;
+    pub fn arb_contains_zero(x: *const arb_struct) -> c_int;
+    pub fn arb_is_nonzero(x: *const arb_struct) -> c_int;
+    pub fn arb_is_positive(x: *const arb_struct) -> c_int;
+    pub fn arb_is_nonnegative(x: *const arb_struct) -> c_int;
+    pub fn arb_is_negative(x: *const arb_struct) -> c_int;
+    pub fn arb_is_nonpositive(x: *const arb_struct) -> c_int;
+    pub fn arb_contains_negative(x: *const arb_struct) -> c_int;
+    pub fn arb_contains_nonpositive(x: *const arb_struct) -> c_int;
+    pub fn arb_contains_positive(x: *const arb_struct) -> c_int;
+    pub fn arb_contains_nonnegative(x: *const arb_struct) -> c_int;
+    pub fn arb_get_mag_lower(z: *mut mag_struct, x: *const arb_struct);
+    pub fn arb_get_mag_lower_nonnegative(z: *mut mag_struct, x: *const arb_struct);
+    pub fn arb_get_mag(z: *mut mag_struct, x: *const arb_struct);
+    pub fn arb_get_mid_arb(z: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_get_rad_arb(z: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_get_abs_ubound_arf(u: *mut arf_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_get_abs_lbound_arf(u: *mut arf_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_get_ubound_arf(u: *mut arf_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_get_lbound_arf(u: *mut arf_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_nonnegative_part(res: *mut arb_struct, x: *const arb_struct);
+    pub fn arb_rel_error_bits(x: *const arb_struct) -> mp_limb_signed_t;
+    pub fn arb_rel_accuracy_bits(x: *const arb_struct) -> mp_limb_signed_t;
+    pub fn arb_rel_one_accuracy_bits(x: *const arb_struct) -> mp_limb_signed_t;
+    pub fn arb_bits(x: *const arb_struct) -> mp_limb_signed_t;
     pub fn arb_randtest_exact(
         x: *mut arb_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
     pub fn arb_randtest_wide(
         x: *mut arb_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
     pub fn arb_randtest_precise(
         x: *mut arb_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
     pub fn arb_randtest(
         x: *mut arb_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
     pub fn arb_randtest_special(
         x: *mut arb_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
-    pub fn arb_urandom(x: *mut arb_struct, state: *mut flint_rand_s, prec: mp_limb_signed_t);
-    pub fn arb_add_error_arf(x: *mut arb_struct, err: *mut arf_struct);
+    pub fn arb_urandom(x: *mut arb_struct, state: *const flint_rand_s, prec: mp_limb_signed_t);
+    pub fn arb_add_error_arf(x: *mut arb_struct, err: *const arf_struct);
     pub fn arb_add_error_2exp_si(x: *mut arb_struct, err: mp_limb_signed_t);
-    pub fn arb_add_error_2exp_fmpz(x: *mut arb_struct, err: *mut fmpz);
-    pub fn arb_add_error(x: *mut arb_struct, error: *mut arb_struct);
-    pub fn arb_add_error_mag(x: *mut arb_struct, err: *mut mag_struct);
-    pub fn arb_contains_arf(x: *mut arb_struct, y: *mut arf_struct) -> c_int;
-    pub fn arb_contains_fmpq(x: *mut arb_struct, y: *mut fmpq) -> c_int;
-    pub fn arb_contains_fmpz(x: *mut arb_struct, y: *mut fmpz) -> c_int;
-    pub fn arb_contains_si(x: *mut arb_struct, y: mp_limb_signed_t) -> c_int;
-    pub fn arb_contains_mpfr(x: *mut arb_struct, y: *mut __mpfr_struct) -> c_int;
-    pub fn arb_overlaps(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_contains(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_contains_interior(x: *mut arb_struct, y: *mut arb_struct) -> c_int;
-    pub fn arb_contains_int(x: *mut arb_struct) -> c_int;
+    pub fn arb_add_error_2exp_fmpz(x: *mut arb_struct, err: *const fmpz);
+    pub fn arb_add_error(x: *mut arb_struct, error: *const arb_struct);
+    pub fn arb_add_error_mag(x: *mut arb_struct, err: *const mag_struct);
+    pub fn arb_contains_arf(x: *const arb_struct, y: *const arf_struct) -> c_int;
+    pub fn arb_contains_fmpq(x: *const arb_struct, y: *const fmpq) -> c_int;
+    pub fn arb_contains_fmpz(x: *const arb_struct, y: *const fmpz) -> c_int;
+    pub fn arb_contains_si(x: *const arb_struct, y: mp_limb_signed_t) -> c_int;
+    pub fn arb_contains_mpfr(x: *const arb_struct, y: *const __mpfr_struct) -> c_int;
+    pub fn arb_overlaps(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_contains(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_contains_interior(x: *const arb_struct, y: *const arb_struct) -> c_int;
+    pub fn arb_contains_int(x: *const arb_struct) -> c_int;
     pub fn arb_get_interval_fmpz_2exp(
         a: *mut fmpz,
         b: *mut fmpz,
         exp: *mut fmpz,
-        x: *mut arb_struct,
+        x: *const arb_struct,
     );
-    pub fn arb_get_unique_fmpz(z: *mut fmpz, x: *mut arb_struct) -> c_int;
+    pub fn arb_get_unique_fmpz(z: *mut fmpz, x: *const arb_struct) -> c_int;
     pub fn arb_get_fmpz_mid_rad_10exp(
         mid: *mut fmpz,
         rad: *mut fmpz,
         exp: *mut fmpz,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_signed_t,
     );
-    pub fn arb_floor(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_ceil(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_floor(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_ceil(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_set_interval_arf(
         x: *mut arb_struct,
-        a: *mut arf_struct,
-        b: *mut arf_struct,
+        a: *const arf_struct,
+        b: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_set_interval_mpfr(
         x: *mut arb_struct,
-        a: *mut __mpfr_struct,
-        b: *mut __mpfr_struct,
+        a: *const __mpfr_struct,
+        b: *const __mpfr_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_get_interval_arf(
         a: *mut arf_struct,
         b: *mut arf_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_get_interval_mpfr(a: *mut __mpfr_struct, b: *mut __mpfr_struct, x: *mut arb_struct);
+    pub fn arb_get_interval_mpfr(a: *mut __mpfr_struct, b: *mut __mpfr_struct, x: *const arb_struct);
     pub fn arb_set_interval_mag(
         res: *mut arb_struct,
-        a: *mut mag_struct,
-        b: *mut mag_struct,
+        a: *const mag_struct,
+        b: *const mag_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_set_interval_neg_pos_mag(
         res: *mut arb_struct,
-        a: *mut mag_struct,
-        b: *mut mag_struct,
+        a: *const mag_struct,
+        b: *const mag_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_union(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_intersection(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     ) -> c_int;
     pub fn arb_get_rand_fmpq(
         q: *mut fmpq,
-        state: *mut flint_rand_s,
-        x: *mut arb_struct,
+        state: *const flint_rand_s,
+        x: *const arb_struct,
         bits: mp_limb_signed_t,
     );
     pub fn arb_min(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_max(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_can_round_arf(
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arb_can_round_mpfr(
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
         rnd: mpfr_rnd_t,
     ) -> c_int;
     pub fn arb_add(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_add_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_add_ui(z: *mut arb_struct, x: *mut arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_add_ui(z: *mut arb_struct, x: *const arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_add_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_add_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_add_fmpz_2exp(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        man: *mut fmpz,
-        exp: *mut fmpz,
+        x: *const arb_struct,
+        man: *const fmpz,
+        exp: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sub(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sub_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_sub_ui(z: *mut arb_struct, x: *mut arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_sub_ui(z: *mut arb_struct, x: *const arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_sub_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sub_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_mul(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_mul_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_mul_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_mul_ui(z: *mut arb_struct, x: *mut arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_mul_ui(z: *mut arb_struct, x: *const arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_mul_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_addmul(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_addmul_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_addmul_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_addmul_ui(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_addmul_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_submul(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_submul_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_submul_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_submul_ui(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_submul_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_dot_simple(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -414,7 +414,7 @@ extern "C" {
     );
     pub fn arb_dot_precise(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -425,7 +425,7 @@ extern "C" {
     );
     pub fn arb_dot(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -436,7 +436,7 @@ extern "C" {
     );
     pub fn arb_approx_dot(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -447,7 +447,7 @@ extern "C" {
     );
     pub fn arb_dot_ui(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -458,7 +458,7 @@ extern "C" {
     );
     pub fn arb_dot_si(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -469,7 +469,7 @@ extern "C" {
     );
     pub fn arb_dot_uiui(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -480,7 +480,7 @@ extern "C" {
     );
     pub fn arb_dot_siui(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -491,7 +491,7 @@ extern "C" {
     );
     pub fn arb_dot_fmpz(
         res: *mut arb_struct,
-        initial: *mut arb_struct,
+        initial: *const arb_struct,
         subtract: c_int,
         x: arb_srcptr,
         xstep: mp_limb_signed_t,
@@ -502,65 +502,65 @@ extern "C" {
     );
     pub fn arb_div(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_div_arf(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arf_struct,
+        x: *const arb_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_div_si(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         y: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_div_ui(z: *mut arb_struct, x: *mut arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_div_ui(z: *mut arb_struct, x: *const arb_struct, y: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_div_fmpz(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut fmpz,
+        x: *const arb_struct,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_fmpz_div_fmpz(
         z: *mut arb_struct,
-        x: *mut fmpz,
-        y: *mut fmpz,
+        x: *const fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_ui_div(z: *mut arb_struct, x: mp_limb_t, y: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_inv(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_set_fmpq(y: *mut arb_struct, x: *mut fmpq, prec: mp_limb_signed_t);
-    pub fn arb_sqrt(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_sqrt_arf(z: *mut arb_struct, x: *mut arf_struct, prec: mp_limb_signed_t);
-    pub fn arb_sqrt_fmpz(z: *mut arb_struct, x: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_ui_div(z: *mut arb_struct, x: mp_limb_t, y: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_inv(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_set_fmpq(y: *mut arb_struct, x: *const fmpq, prec: mp_limb_signed_t);
+    pub fn arb_sqrt(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sqrt_arf(z: *mut arb_struct, x: *const arf_struct, prec: mp_limb_signed_t);
+    pub fn arb_sqrt_fmpz(z: *mut arb_struct, x: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_sqrt_ui(z: *mut arb_struct, x: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_sqrtpos(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sqrtpos(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_hypot(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_rsqrt(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_rsqrt(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_rsqrt_ui(z: *mut arb_struct, x: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_sqrt1pm1(r: *mut arb_struct, z: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sqrt1pm1(r: *mut arb_struct, z: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_pow_fmpz_binexp(
         y: *mut arb_struct,
-        b: *mut arb_struct,
-        e: *mut fmpz,
+        b: *const arb_struct,
+        e: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_pow_fmpz(
         y: *mut arb_struct,
-        b: *mut arb_struct,
-        e: *mut fmpz,
+        b: *const arb_struct,
+        e: *const fmpz,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_pow_ui(y: *mut arb_struct, b: *mut arb_struct, e: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_pow_ui(y: *mut arb_struct, b: *const arb_struct, e: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_ui_pow_ui(y: *mut arb_struct, b: mp_limb_t, e: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_si_pow_ui(
         y: *mut arb_struct,
@@ -570,74 +570,74 @@ extern "C" {
     );
     pub fn arb_pow_fmpq(
         y: *mut arb_struct,
-        x: *mut arb_struct,
-        a: *mut fmpq,
+        x: *const arb_struct,
+        a: *const fmpq,
         prec: mp_limb_signed_t,
     );
     pub fn arb_div_2expm1_ui(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_pow(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_root_ui(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         k: mp_limb_t,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_root(z: *mut arb_struct, x: *mut arb_struct, k: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_log(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_log_arf(z: *mut arb_struct, x: *mut arf_struct, prec: mp_limb_signed_t);
+    pub fn arb_root(z: *mut arb_struct, x: *const arb_struct, k: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_log(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_log_arf(z: *mut arb_struct, x: *const arf_struct, prec: mp_limb_signed_t);
     pub fn arb_log_ui(z: *mut arb_struct, x: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_log_fmpz(z: *mut arb_struct, x: *mut fmpz, prec: mp_limb_signed_t);
-    pub fn arb_log1p(r: *mut arb_struct, z: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_log_fmpz(z: *mut arb_struct, x: *const fmpz, prec: mp_limb_signed_t);
+    pub fn arb_log1p(r: *mut arb_struct, z: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_log_base_ui(
         res: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         b: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_log_hypot(
         res: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_exp(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_expm1(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_exp(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_expm1(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_exp_invexp(
         z: *mut arb_struct,
-        w: *mut arb_struct,
-        x: *mut arb_struct,
+        w: *const arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_sin(s: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_cos(c: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sin(s: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_cos(c: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_sin_cos(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_sin_pi(s: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_cos_pi(c: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sin_pi(s: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_cos_pi(c: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_sin_cos_pi(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_tan(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_cot(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_tan_pi(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_cot_pi(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_tan(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_cot(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_tan_pi(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_cot_pi(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn _arb_sin_pi_fmpq_algebraic(
         s: *mut arb_struct,
         p: mp_limb_t,
@@ -660,46 +660,46 @@ extern "C" {
     pub fn arb_sin_cos_pi_fmpq(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut fmpq,
+        x: *const fmpq,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_sin_pi_fmpq(s: *mut arb_struct, x: *mut fmpq, prec: mp_limb_signed_t);
-    pub fn arb_cos_pi_fmpq(c: *mut arb_struct, x: *mut fmpq, prec: mp_limb_signed_t);
-    pub fn arb_sinc(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_sinc_pi(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_sinh(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_cosh(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sin_pi_fmpq(s: *mut arb_struct, x: *const fmpq, prec: mp_limb_signed_t);
+    pub fn arb_cos_pi_fmpq(c: *mut arb_struct, x: *const fmpq, prec: mp_limb_signed_t);
+    pub fn arb_sinc(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sinc_pi(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sinh(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_cosh(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_sinh_cosh(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_tanh(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_coth(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_atan_arf(z: *mut arb_struct, x: *mut arf_struct, prec: mp_limb_signed_t);
-    pub fn arb_atan(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_tanh(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_coth(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_atan_arf(z: *mut arb_struct, x: *const arf_struct, prec: mp_limb_signed_t);
+    pub fn arb_atan(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_atan2(
         z: *mut arb_struct,
-        b: *mut arb_struct,
-        a: *mut arb_struct,
+        b: *const arb_struct,
+        a: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_asin(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_acos(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_atanh(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_asinh(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_acosh(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_sec(res: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_csc(res: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_csc_pi(res: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_sech(res: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_csch(res: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_asin(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_acos(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_atanh(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_asinh(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_acosh(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sec(res: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_csc(res: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_csc_pi(res: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sech(res: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_csch(res: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_fac_ui(z: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_doublefac_ui(z: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_bin_ui(z: *mut arb_struct, n: *mut arb_struct, k: mp_limb_t, prec: mp_limb_signed_t);
+    pub fn arb_bin_ui(z: *mut arb_struct, n: *const arb_struct, k: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_bin_uiui(z: *mut arb_struct, n: mp_limb_t, k: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_fib_fmpz(z: *mut arb_struct, n: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_fib_fmpz(z: *mut arb_struct, n: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_fib_ui(z: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_const_pi(z: *mut arb_struct, prec: mp_limb_signed_t);
     pub fn arb_const_sqrt_pi(z: *mut arb_struct, prec: mp_limb_signed_t);
@@ -713,64 +713,64 @@ extern "C" {
     pub fn arb_const_glaisher(z: *mut arb_struct, prec: mp_limb_signed_t);
     pub fn arb_agm(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        y: *mut arb_struct,
+        x: *const arb_struct,
+        y: *const arb_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_lgamma(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_rgamma(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_gamma(z: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_gamma_fmpq(z: *mut arb_struct, x: *mut fmpq, prec: mp_limb_signed_t);
-    pub fn arb_gamma_fmpz(z: *mut arb_struct, x: *mut fmpz, prec: mp_limb_signed_t);
-    pub fn arb_digamma(y: *mut arb_struct, x: *mut arb_struct, prec: mp_limb_signed_t);
-    pub fn arb_zeta(z: *mut arb_struct, s: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_lgamma(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_rgamma(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_gamma(z: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_gamma_fmpq(z: *mut arb_struct, x: *const fmpq, prec: mp_limb_signed_t);
+    pub fn arb_gamma_fmpz(z: *mut arb_struct, x: *const fmpz, prec: mp_limb_signed_t);
+    pub fn arb_digamma(y: *mut arb_struct, x: *const arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_zeta(z: *mut arb_struct, s: *const arb_struct, prec: mp_limb_signed_t);
     pub fn arb_hurwitz_zeta(
         z: *mut arb_struct,
-        s: *mut arb_struct,
-        a: *mut arb_struct,
+        s: *const arb_struct,
+        a: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising_ui_bs(
         y: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising_ui_rs(
         y: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         m: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising_ui_rec(
         y: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising_ui(
         z: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising_fmpq_ui(
         y: *mut arb_struct,
-        x: *mut fmpq,
+        x: *const fmpq,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising(
         z: *mut arb_struct,
-        x: *mut arb_struct,
-        n: *mut arb_struct,
+        x: *const arb_struct,
+        n: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising2_ui_rs(
         u: *mut arb_struct,
         v: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         m: mp_limb_t,
         prec: mp_limb_signed_t,
@@ -778,21 +778,21 @@ extern "C" {
     pub fn arb_rising2_ui_bs(
         u: *mut arb_struct,
         v: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_rising2_ui(
         u: *mut arb_struct,
         v: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         n: mp_limb_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_log_ui_from_prev(
         s: *mut arb_struct,
         k: mp_limb_t,
-        log_prev: *mut arb_struct,
+        log_prev: *const arb_struct,
         prev: mp_limb_t,
         prec: mp_limb_signed_t,
     );
@@ -829,87 +829,87 @@ extern "C" {
     );
     pub fn arb_bernoulli_ui(b: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_bernoulli_ui_zeta(b: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_bernoulli_fmpz(b: *mut arb_struct, n: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_bernoulli_fmpz(b: *mut arb_struct, n: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_bernoulli_poly_ui(
         res: *mut arb_struct,
         n: mp_limb_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_polylog(
         w: *mut arb_struct,
-        s: *mut arb_struct,
-        z: *mut arb_struct,
+        s: *const arb_struct,
+        z: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_polylog_si(
         w: *mut arb_struct,
         s: mp_limb_signed_t,
-        z: *mut arb_struct,
+        z: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_chebyshev_t_ui(
         a: *mut arb_struct,
         n: mp_limb_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_chebyshev_t2_ui(
         a: *mut arb_struct,
         b: *mut arb_struct,
         n: mp_limb_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_chebyshev_u_ui(
         a: *mut arb_struct,
         n: mp_limb_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_chebyshev_u2_ui(
         a: *mut arb_struct,
         b: *mut arb_struct,
         n: mp_limb_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_power_sum_vec(
         res: arb_ptr,
-        a: *mut arb_struct,
-        b: *mut arb_struct,
+        a: *const arb_struct,
+        b: *const arb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_bell_sum_taylor(
         res: *mut arb_struct,
-        n: *mut fmpz,
-        a: *mut fmpz,
-        b: *mut fmpz,
-        mmag: *mut fmpz,
+        n: *const fmpz,
+        a: *const fmpz,
+        b: *const fmpz,
+        mmag: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn arb_bell_sum_bsplit(
         res: *mut arb_struct,
-        n: *mut fmpz,
-        a: *mut fmpz,
-        b: *mut fmpz,
-        mmag: *mut fmpz,
+        n: *const fmpz,
+        a: *const fmpz,
+        b: *const fmpz,
+        mmag: *const fmpz,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_bell_fmpz(res: *mut arb_struct, n: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_bell_fmpz(res: *mut arb_struct, n: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_bell_ui(res: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_euler_number_fmpz(res: *mut arb_struct, n: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_euler_number_fmpz(res: *mut arb_struct, n: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_euler_number_ui(res: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
-    pub fn arb_partitions_fmpz(res: *mut arb_struct, n: *mut fmpz, prec: mp_limb_signed_t);
+    pub fn arb_partitions_fmpz(res: *mut arb_struct, n: *const fmpz, prec: mp_limb_signed_t);
     pub fn arb_partitions_ui(res: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_lambertw(
         res: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         flags: c_int,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_sqr(res: *mut arb_struct, val: *mut arb_struct, prec: mp_limb_signed_t);
+    pub fn arb_sqr(res: *mut arb_struct, val: *const arb_struct, prec: mp_limb_signed_t);
     pub fn _arb_vec_entry_ptr(vec: arb_ptr, i: mp_limb_signed_t) -> arb_ptr;
     pub fn _arb_vec_printn(
         vec: arb_srcptr,
@@ -947,21 +947,21 @@ extern "C" {
         res: arb_ptr,
         vec: arb_srcptr,
         len: mp_limb_signed_t,
-        c: *mut arb_struct,
+        c: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_vec_scalar_div(
         res: arb_ptr,
         vec: arb_srcptr,
         len: mp_limb_signed_t,
-        c: *mut arb_struct,
+        c: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_vec_scalar_mul_fmpz(
         res: arb_ptr,
         vec: arb_srcptr,
         len: mp_limb_signed_t,
-        c: *mut fmpz,
+        c: *const fmpz,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_vec_scalar_mul_2exp_si(
@@ -974,14 +974,14 @@ extern "C" {
         res: arb_ptr,
         vec: arb_srcptr,
         len: mp_limb_signed_t,
-        c: *mut arb_struct,
+        c: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_vec_get_mag(bound: *mut mag_struct, vec: arb_srcptr, len: mp_limb_signed_t);
     pub fn _arb_vec_bits(x: arb_srcptr, len: mp_limb_signed_t) -> mp_limb_signed_t;
     pub fn _arb_vec_set_powers(
         xs: arb_ptr,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -1038,13 +1038,13 @@ extern "C" {
     );
     pub fn arb_exp_arf_bb(
         z: *mut arb_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
         minus_one: c_int,
     );
     pub fn arb_exp_arf_rs_generic(
         res: *mut arb_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
         minus_one: c_int,
     );
@@ -1052,7 +1052,7 @@ extern "C" {
         w: mp_ptr,
         q: *mut fmpz,
         error: *mut mp_limb_t,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         wn: mp_size_t,
     ) -> c_int;
     pub fn _arb_exp_taylor_bound(mag: mp_limb_signed_t, prec: mp_limb_signed_t)
@@ -1061,7 +1061,7 @@ extern "C" {
         T: *mut fmpz,
         Q: *mut fmpz,
         Qexp: *mut mp_limb_t,
-        x: *mut fmpz,
+        x: *const fmpz,
         r: mp_limb_t,
         N: mp_limb_signed_t,
     );
@@ -1069,7 +1069,7 @@ extern "C" {
         T: *mut fmpz,
         Q: *mut fmpz,
         Qexp: *mut mp_limb_t,
-        x: *mut fmpz,
+        x: *const fmpz,
         r: mp_limb_t,
         N: mp_limb_signed_t,
     );
@@ -1100,51 +1100,51 @@ extern "C" {
         q: *mut fmpz,
         octant: *mut c_int,
         error: *mut mp_limb_t,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         wn: mp_size_t,
     ) -> c_int;
     pub fn arb_sin_cos_arf_bb(
         zsin: *mut arb_struct,
         zcos: *mut arb_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sin_cos_arf_rs_generic(
         res_sin: *mut arb_struct,
         res_cos: *mut arb_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sin_cos_arf_generic(
         res_sin: *mut arb_struct,
         res_cos: *mut arb_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_sin_cos_wide(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arf_struct,
-        r: *mut mag_struct,
+        x: *const arf_struct,
+        r: *const mag_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sin_cos_wide(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_sin_cos_generic(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arf_struct,
-        xrad: *mut mag_struct,
+        x: *const arf_struct,
+        xrad: *const mag_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_sin_cos_generic(
         s: *mut arb_struct,
         c: *mut arb_struct,
-        x: *mut arb_struct,
+        x: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_mpn_leading_zeros(d: mp_srcptr, n: mp_size_t) -> mp_limb_t;
@@ -1152,7 +1152,7 @@ extern "C" {
         T: *mut fmpz,
         Q: *mut fmpz,
         Qexp: *mut mp_limb_t,
-        x: *mut fmpz,
+        x: *const fmpz,
         r: mp_limb_t,
         N: mp_limb_signed_t,
     );
@@ -1160,19 +1160,19 @@ extern "C" {
         T: *mut fmpz,
         Q: *mut fmpz,
         Qexp: *mut mp_limb_t,
-        x: *mut fmpz,
+        x: *const fmpz,
         r: mp_limb_t,
         N: mp_limb_signed_t,
     );
-    pub fn arb_atan_arf_bb(z: *mut arb_struct, x: *mut arf_struct, prec: mp_limb_signed_t);
-    pub fn arb_allocated_bytes(x: *mut arb_struct) -> mp_limb_signed_t;
+    pub fn arb_atan_arf_bb(z: *mut arb_struct, x: *const arf_struct, prec: mp_limb_signed_t);
+    pub fn arb_allocated_bytes(x: *const arb_struct) -> mp_limb_signed_t;
     pub fn _arb_vec_allocated_bytes(vec: arb_srcptr, len: mp_limb_signed_t) -> mp_limb_signed_t;
     pub fn _arb_vec_estimate_allocated_bytes(len: mp_limb_signed_t, prec: mp_limb_signed_t) -> f64;
     pub fn arb_load_str(
         res: *mut arb_struct,
         data: *const c_char,
     ) -> c_int;
-    pub fn arb_dump_str(x: *mut arb_struct) -> *mut c_char;
-    pub fn arb_load_file(res: *mut arb_struct, stream: *mut FILE) -> c_int;
-    pub fn arb_dump_file(stream: *mut FILE, x: *mut arb_struct) -> c_int;
+    pub fn arb_dump_str(x: *const arb_struct) -> *mut c_char;
+    pub fn arb_load_file(res: *mut arb_struct, stream: *const FILE) -> c_int;
+    pub fn arb_dump_file(stream: *mut FILE, x: *const arb_struct) -> c_int;
 }
