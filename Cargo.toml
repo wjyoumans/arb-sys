@@ -13,8 +13,8 @@ readme = "README.md"
 
 [dependencies]
 libc = "0.2"
-#flint-sys = "0.4"
-flint-sys = { path = "../flint-rs/flint-sys" }
+flint-sys = "0.4"
+#flint-sys = { path = "../flint-rs/flint-sys" }
 
 #[dev-dependencies]
 #quickcheck = "1.0"
