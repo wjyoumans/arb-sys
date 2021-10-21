@@ -1,12 +1,12 @@
 [package]
 name = "arb-sys"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["William Youmans <wyoumans@usf.edu>"]
 edition = "2018"
 description = "Bindings to the Arb library"
-homepage = "https://github.com/wyoumansUSF/arb-sys"
-repository = "https://github.com/wyoumansUSF/arb-sys"
-license = "LGPL-3.0+" 
+homepage = "https://github.com/wjyoumans/arb-sys"
+repository = "https://github.com/wjyoumans/arb-sys"
+license = "MIT OR Apache-2.0" 
 keywords = ["flint", "real", "complex", "number-theory", "math"]
 categories = ["algorithms", "external-ffi-bindings", "mathematics"]
 readme = "README.md"
@@ -14,9 +14,4 @@ readme = "README.md"
 [dependencies]
 libc = "0.2"
 flint-sys = "0.4"
-#flint-sys = { path = "../flint-rs/flint-sys" }
-
-#[dev-dependencies]
-#quickcheck = "1.0"
-#quickcheck_macros = "1.0"
 
