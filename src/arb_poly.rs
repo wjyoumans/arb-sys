@@ -30,20 +30,20 @@ extern "C" {
     pub fn arb_poly_fit_length(poly: *mut arb_poly_struct, len: mp_limb_signed_t);
     pub fn _arb_poly_set_length(poly: *mut arb_poly_struct, len: mp_limb_signed_t);
     pub fn _arb_poly_normalise(poly: *mut arb_poly_struct);
-    pub fn arb_poly_set(poly: *mut arb_poly_struct, src: *mut arb_poly_struct);
+    pub fn arb_poly_set(poly: *mut arb_poly_struct, src: *const arb_poly_struct);
     pub fn arb_poly_set_round(
         poly: *mut arb_poly_struct,
-        src: *mut arb_poly_struct,
+        src: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_set_trunc(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         n: mp_limb_signed_t,
     );
     pub fn arb_poly_set_trunc_round(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -56,11 +56,11 @@ extern "C" {
     pub fn arb_poly_set_coeff_arb(
         poly: *mut arb_poly_struct,
         n: mp_limb_signed_t,
-        x: *mut arb_struct,
+        x: *const arb_struct,
     );
     pub fn arb_poly_get_coeff_arb(
         x: *mut arb_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         n: mp_limb_signed_t,
     );
     pub fn _arb_poly_reverse(
@@ -77,7 +77,7 @@ extern "C" {
     );
     pub fn arb_poly_shift_right(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         n: mp_limb_signed_t,
     );
     pub fn _arb_poly_shift_left(
@@ -88,39 +88,39 @@ extern "C" {
     );
     pub fn arb_poly_shift_left(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         n: mp_limb_signed_t,
     );
     pub fn arb_poly_set_fmpz_poly(
         poly: *mut arb_poly_struct,
-        src: *mut fmpz_poly_struct,
+        src: *const fmpz_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_set_fmpq_poly(
         poly: *mut arb_poly_struct,
-        src: *mut fmpq_poly_struct,
+        src: *const fmpq_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_set_si(poly: *mut arb_poly_struct, c: mp_limb_signed_t);
     pub fn arb_poly_get_unique_fmpz_poly(
         res: *mut fmpz_poly_struct,
-        src: *mut arb_poly_struct,
+        src: *const arb_poly_struct,
     ) -> c_int;
     pub fn arb_poly_contains(
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
     ) -> c_int;
     pub fn arb_poly_contains_fmpz_poly(
-        poly1: *mut arb_poly_struct,
-        poly2: *mut fmpz_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const fmpz_poly_struct,
     ) -> c_int;
     pub fn arb_poly_contains_fmpq_poly(
-        poly1: *mut arb_poly_struct,
-        poly2: *mut fmpq_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const fmpq_poly_struct,
     ) -> c_int;
     pub fn arb_poly_equal(
-        A: *mut arb_poly_struct,
-        B: *mut arb_poly_struct,
+        A: *const arb_poly_struct,
+        B: *const arb_poly_struct,
     ) -> c_int;
     pub fn _arb_poly_overlaps(
         poly1: arb_srcptr,
@@ -129,8 +129,8 @@ extern "C" {
         len2: mp_limb_signed_t,
     ) -> c_int;
     pub fn arb_poly_overlaps(
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
     ) -> c_int;
     pub fn _arb_poly_majorant(
         res: arb_ptr,
@@ -140,13 +140,13 @@ extern "C" {
     );
     pub fn arb_poly_majorant(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_poly_fprintd(file: *mut FILE, poly: *mut arb_poly_struct, digits: mp_limb_signed_t);
+    pub fn arb_poly_fprintd(file: *mut FILE, poly: *const arb_poly_struct, digits: mp_limb_signed_t);
     pub fn arb_poly_randtest(
         poly: *mut arb_poly_struct,
-        state: *mut flint_rand_s,
+        state: *const flint_rand_s,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
@@ -161,13 +161,13 @@ extern "C" {
     );
     pub fn arb_poly_add(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_add_si(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         c: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -181,21 +181,21 @@ extern "C" {
     );
     pub fn arb_poly_sub(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_add_series(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_sub_series(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -210,8 +210,8 @@ extern "C" {
     );
     pub fn arb_poly_mullow_ztrunc(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -226,8 +226,8 @@ extern "C" {
     );
     pub fn arb_poly_mullow_classical(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -242,8 +242,8 @@ extern "C" {
     );
     pub fn arb_poly_mullow_block(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -258,8 +258,8 @@ extern "C" {
     );
     pub fn arb_poly_mullow(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -273,8 +273,8 @@ extern "C" {
     );
     pub fn arb_poly_mul(
         res: *mut arb_poly_struct,
-        poly1: *mut arb_poly_struct,
-        poly2: *mut arb_poly_struct,
+        poly1: *const arb_poly_struct,
+        poly2: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_poly_inv_series(
@@ -286,7 +286,7 @@ extern "C" {
     );
     pub fn arb_poly_inv_series(
         Qinv: *mut arb_poly_struct,
-        Q: *mut arb_poly_struct,
+        Q: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -301,8 +301,8 @@ extern "C" {
     );
     pub fn arb_poly_div_series(
         Q: *mut arb_poly_struct,
-        A: *mut arb_poly_struct,
-        B: *mut arb_poly_struct,
+        A: *const arb_poly_struct,
+        B: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -334,8 +334,8 @@ extern "C" {
     pub fn arb_poly_divrem(
         Q: *mut arb_poly_struct,
         R: *mut arb_poly_struct,
-        A: *mut arb_poly_struct,
-        B: *mut arb_poly_struct,
+        A: *const arb_poly_struct,
+        B: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     ) -> c_int;
     pub fn _arb_poly_div_root(
@@ -343,7 +343,7 @@ extern "C" {
         R: *mut arb_struct,
         A: arb_srcptr,
         len: mp_limb_signed_t,
-        c: *mut arb_struct,
+        c: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_poly_product_roots(
@@ -586,7 +586,7 @@ extern "C" {
         res: *mut arb_struct,
         f: arb_srcptr,
         len: mp_limb_signed_t,
-        a: *mut arb_struct,
+        a: *const arb_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_evaluate(
@@ -673,7 +673,7 @@ extern "C" {
     );
     pub fn arb_poly_evaluate_vec_fast(
         ys: arb_ptr,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         xs: arb_srcptr,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
@@ -742,7 +742,7 @@ extern "C" {
     );
     pub fn arb_poly_derivative(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_poly_integral(
@@ -753,12 +753,12 @@ extern "C" {
     );
     pub fn arb_poly_integral(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_borel_transform(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_poly_borel_transform(
@@ -769,7 +769,7 @@ extern "C" {
     );
     pub fn arb_poly_inv_borel_transform(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
     pub fn _arb_poly_inv_borel_transform(
@@ -787,7 +787,7 @@ extern "C" {
     );
     pub fn arb_poly_binomial_transform_basecase(
         b: *mut arb_poly_struct,
-        a: *mut arb_poly_struct,
+        a: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -800,7 +800,7 @@ extern "C" {
     );
     pub fn arb_poly_binomial_transform_convolution(
         b: *mut arb_poly_struct,
-        a: *mut arb_poly_struct,
+        a: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -813,7 +813,7 @@ extern "C" {
     );
     pub fn arb_poly_binomial_transform(
         b: *mut arb_poly_struct,
-        a: *mut arb_poly_struct,
+        a: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -827,7 +827,7 @@ extern "C" {
     );
     pub fn arb_poly_pow_ui_trunc_binexp(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         exp: mp_limb_t,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
@@ -841,7 +841,7 @@ extern "C" {
     );
     pub fn arb_poly_pow_ui(
         res: *mut arb_poly_struct,
-        poly: *mut arb_poly_struct,
+        poly: *const arb_poly_struct,
         exp: mp_limb_t,
         prec: mp_limb_signed_t,
     );
@@ -856,8 +856,8 @@ extern "C" {
     );
     pub fn arb_poly_pow_series(
         h: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
-        g: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
+        g: *const arb_poly_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -865,14 +865,14 @@ extern "C" {
         h: arb_ptr,
         f: arb_srcptr,
         flen: mp_limb_signed_t,
-        g: *mut arb_struct,
+        g: *const arb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
     pub fn arb_poly_pow_arb_series(
         h: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
-        g: *mut arb_struct,
+        f: *const arb_poly_struct,
+        g: *const arb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -880,7 +880,7 @@ extern "C" {
         h: arb_ptr,
         f: arb_srcptr,
         flen: mp_limb_signed_t,
-        g: *mut arb_struct,
+        g: *const arb_struct,
         len: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -893,7 +893,7 @@ extern "C" {
     );
     pub fn arb_poly_rsqrt_series(
         g: *mut arb_poly_struct,
-        h: *mut arb_poly_struct,
+        h: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -906,7 +906,7 @@ extern "C" {
     );
     pub fn arb_poly_sqrt_series(
         g: *mut arb_poly_struct,
-        h: *mut arb_poly_struct,
+        h: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -919,7 +919,7 @@ extern "C" {
     );
     pub fn arb_poly_log_series(
         res: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -932,7 +932,7 @@ extern "C" {
     );
     pub fn arb_poly_log1p_series(
         res: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -945,7 +945,7 @@ extern "C" {
     );
     pub fn arb_poly_atan_series(
         res: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -958,7 +958,7 @@ extern "C" {
     );
     pub fn arb_poly_asin_series(
         res: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
@@ -971,7 +971,7 @@ extern "C" {
     );
     pub fn arb_poly_acos_series(
         res: *mut arb_poly_struct,
-        f: *mut arb_poly_struct,
+        f: *const arb_poly_struct,
         n: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
