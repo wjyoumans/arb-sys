@@ -2,13 +2,12 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_ptr, acb_struct};
+use crate::arb::arb_struct;
+use crate::arf::arf_struct;
+use crate::mag::mag_struct;
 use flint_sys::deps::*;
 use libc::{c_int, c_void};
-use crate::mag::mag_struct;
-use crate::arf::arf_struct;
-use crate::arb::arb_struct;
-use crate::acb::{acb_struct, acb_ptr};
-
 
 pub type acb_calc_func_t = ::std::option::Option<
     unsafe extern "C" fn(

@@ -2,13 +2,12 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::fmpr::fmpr_struct;
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
 use flint_sys::fmpq::fmpq;
-use crate::fmpr::fmpr_struct;
+use flint_sys::fmpz::fmpz;
 use libc::{c_char, c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -151,10 +150,7 @@ extern "C" {
     pub fn mag_div_ui(z: *mut mag_struct, x: *mut mag_struct, y: mp_limb_t);
     pub fn mag_div_fmpz(z: *mut mag_struct, x: *mut mag_struct, y: *mut fmpz);
     pub fn mag_allocated_bytes(x: *mut mag_struct) -> mp_limb_signed_t;
-    pub fn mag_load_str(
-        res: *mut mag_struct,
-        data: *const c_char,
-    ) -> c_int;
+    pub fn mag_load_str(res: *mut mag_struct, data: *const c_char) -> c_int;
     pub fn mag_dump_str(x: *mut mag_struct) -> *mut c_char;
     pub fn mag_load_file(res: *mut mag_struct, stream: *mut FILE) -> c_int;
     pub fn mag_dump_file(stream: *mut FILE, x: *mut mag_struct) -> c_int;

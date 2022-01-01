@@ -2,12 +2,11 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_ptr, acb_struct};
+use crate::arb::arb_struct;
 use flint_sys::deps::*;
 use flint_sys::fmpz::fmpz;
 use flint_sys::fmpz_poly::fmpz_poly_struct;
-use crate::arb::arb_struct;
-use crate::acb::{acb_struct, acb_ptr};
-
 
 extern "C" {
     pub fn _arb_fmpz_poly_evaluate_acb_horner(

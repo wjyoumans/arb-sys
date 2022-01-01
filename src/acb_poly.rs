@@ -2,17 +2,16 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_ptr, acb_srcptr, acb_struct};
+use crate::arb::arb_ptr;
+use crate::arb_poly::arb_poly_struct;
+use crate::mag::mag_struct;
 use flint_sys::deps::*;
 use flint_sys::flint::*;
+use flint_sys::fmpq_poly::fmpq_poly_struct;
 use flint_sys::fmpz::fmpz;
 use flint_sys::fmpz_poly::fmpz_poly_struct;
-use flint_sys::fmpq_poly::fmpq_poly_struct;
-use crate::mag::mag_struct;
-use crate::arb::arb_ptr;
-use crate::acb::{acb_struct, acb_ptr, acb_srcptr};
-use crate::arb_poly::arb_poly_struct;
 use libc::{c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -305,10 +304,7 @@ extern "C" {
         prec: mp_limb_signed_t,
         mag_bits: mp_limb_signed_t,
     );
-    pub fn acb_poly_equal(
-        A: *mut acb_poly_struct,
-        B: *mut acb_poly_struct,
-    ) -> c_int;
+    pub fn acb_poly_equal(A: *mut acb_poly_struct, B: *mut acb_poly_struct) -> c_int;
     pub fn acb_poly_contains_fmpz_poly(
         poly1: *mut acb_poly_struct,
         poly2: *mut fmpz_poly_struct,
@@ -323,14 +319,8 @@ extern "C" {
         poly2: acb_srcptr,
         len2: mp_limb_signed_t,
     ) -> c_int;
-    pub fn acb_poly_overlaps(
-        poly1: *mut acb_poly_struct,
-        poly2: *mut acb_poly_struct,
-    ) -> c_int;
-    pub fn acb_poly_contains(
-        poly1: *mut acb_poly_struct,
-        poly2: *mut acb_poly_struct,
-    ) -> c_int;
+    pub fn acb_poly_overlaps(poly1: *mut acb_poly_struct, poly2: *mut acb_poly_struct) -> c_int;
+    pub fn acb_poly_contains(poly1: *mut acb_poly_struct, poly2: *mut acb_poly_struct) -> c_int;
     pub fn _acb_poly_add(
         res: acb_ptr,
         poly1: acb_srcptr,

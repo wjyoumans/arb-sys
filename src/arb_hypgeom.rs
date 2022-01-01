@@ -2,12 +2,11 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::arb::{arb_ptr, arb_srcptr, arb_struct};
+use crate::arb_poly::arb_poly_struct;
+use crate::mag::mag_struct;
 use flint_sys::deps::*;
 use flint_sys::fmpz::fmpz;
-use crate::mag::mag_struct;
-use crate::arb::{arb_struct, arb_ptr, arb_srcptr};
-use crate::arb_poly::arb_poly_struct;
-
 
 extern "C" {
     pub fn _arb_hypgeom_rising_coeffs_1(c: *mut mp_limb_t, k: mp_limb_t, l: mp_limb_signed_t);
@@ -597,4 +596,4 @@ extern "C" {
     );
     pub fn arb_hypgeom_central_bin_ui(res: *mut arb_struct, n: mp_limb_t, prec: mp_limb_signed_t);
     pub fn arb_hypgeom_dilog(res: *mut arb_struct, z: *mut arb_struct, prec: mp_limb_signed_t);
-    }
+}

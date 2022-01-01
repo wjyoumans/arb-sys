@@ -2,13 +2,13 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_ptr, acb_srcptr, acb_struct};
+use crate::acb_poly::acb_poly_struct;
+use crate::arf::arf_struct;
 use flint_sys::deps::*;
 use flint_sys::flint::*;
 use flint_sys::fmpz::fmpz;
 use flint_sys::fmpz_poly::fmpz_poly_struct;
-use crate::arf::arf_struct;
-use crate::acb::{acb_struct, acb_ptr, acb_srcptr};
-use crate::acb_poly::acb_poly_struct;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

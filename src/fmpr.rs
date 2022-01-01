@@ -4,10 +4,9 @@
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
 use flint_sys::fmpq::fmpq;
+use flint_sys::fmpz::fmpz;
 use libc::c_int;
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -88,11 +87,7 @@ extern "C" {
         bits: mp_limb_signed_t,
         exp_bits: mp_limb_signed_t,
     );
-    pub fn fmpr_get_mpfr(
-        x: *mut __mpfr_struct,
-        y: *mut fmpr_struct,
-        rnd: mpfr_rnd_t,
-    ) -> c_int;
+    pub fn fmpr_get_mpfr(x: *mut __mpfr_struct, y: *mut fmpr_struct, rnd: mpfr_rnd_t) -> c_int;
     pub fn fmpr_set_mpfr(x: *mut fmpr_struct, y: *mut __mpfr_struct);
     pub fn fmpr_get_d(x: *mut fmpr_struct, rnd: c_int) -> f64;
     pub fn fmpr_set_d(x: *mut fmpr_struct, v: f64);
@@ -429,16 +424,8 @@ extern "C" {
     pub fn fmpr_get_si(x: *mut fmpr_struct, rnd: c_int) -> mp_limb_signed_t;
     pub fn fmpr_set_fmpz_2exp(x: *mut fmpr_struct, man: *mut fmpz, exp: *mut fmpz);
     pub fn fmpr_get_fmpz_2exp(man: *mut fmpz, exp: *mut fmpz, x: *mut fmpr_struct);
-    pub fn fmpr_get_fmpz_fixed_fmpz(
-        y: *mut fmpz,
-        x: *mut fmpr_struct,
-        e: *mut fmpz,
-    ) -> c_int;
-    pub fn fmpr_get_fmpz_fixed_si(
-        y: *mut fmpz,
-        x: *mut fmpr_struct,
-        e: mp_limb_signed_t,
-    ) -> c_int;
+    pub fn fmpr_get_fmpz_fixed_fmpz(y: *mut fmpz, x: *mut fmpr_struct, e: *mut fmpz) -> c_int;
+    pub fn fmpr_get_fmpz_fixed_si(y: *mut fmpz, x: *mut fmpr_struct, e: mp_limb_signed_t) -> c_int;
     pub fn fmpr_cmp_2exp_si(x: *mut fmpr_struct, e: mp_limb_signed_t) -> c_int;
     pub fn fmpr_cmpabs_2exp_si(x: *mut fmpr_struct, e: mp_limb_signed_t) -> c_int;
     pub fn fmpr_pow_sloppy_fmpz(

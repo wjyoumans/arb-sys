@@ -2,11 +2,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use crate::arb::{arb_struct, arb_ptr};
+use crate::arb::{arb_ptr, arb_struct};
 use crate::arf::arf_struct;
+use flint_sys::deps::*;
 use libc::{c_int, c_void};
-
 
 pub type arb_calc_func_t = ::std::option::Option<
     unsafe extern "C" fn(

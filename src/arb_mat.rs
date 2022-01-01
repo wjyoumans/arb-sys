@@ -2,15 +2,14 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::arb::{arb_ptr, arb_srcptr, arb_struct};
+use crate::arb_poly::arb_poly_struct;
+use crate::mag::{mag_srcptr, mag_struct};
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz_mat::fmpz_mat_struct;
 use flint_sys::fmpq_mat::fmpq_mat_struct;
-use crate::mag::{mag_struct, mag_srcptr};
-use crate::arb::{arb_struct, arb_ptr, arb_srcptr};
-use crate::arb_poly::arb_poly_struct;
+use flint_sys::fmpz_mat::fmpz_mat_struct;
 use libc::{c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -53,26 +52,11 @@ extern "C" {
         mag_bits: mp_limb_signed_t,
     );
     pub fn arb_mat_fprintd(file: *mut FILE, mat: *mut arb_mat_struct, digits: mp_limb_signed_t);
-    pub fn arb_mat_eq(
-        mat1: *mut arb_mat_struct,
-        mat2: *mut arb_mat_struct,
-    ) -> c_int;
-    pub fn arb_mat_ne(
-        mat1: *mut arb_mat_struct,
-        mat2: *mut arb_mat_struct,
-    ) -> c_int;
-    pub fn arb_mat_equal(
-        mat1: *mut arb_mat_struct,
-        mat2: *mut arb_mat_struct,
-    ) -> c_int;
-    pub fn arb_mat_overlaps(
-        mat1: *mut arb_mat_struct,
-        mat2: *mut arb_mat_struct,
-    ) -> c_int;
-    pub fn arb_mat_contains(
-        mat1: *mut arb_mat_struct,
-        mat2: *mut arb_mat_struct,
-    ) -> c_int;
+    pub fn arb_mat_eq(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct) -> c_int;
+    pub fn arb_mat_ne(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct) -> c_int;
+    pub fn arb_mat_equal(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct) -> c_int;
+    pub fn arb_mat_overlaps(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct) -> c_int;
+    pub fn arb_mat_contains(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct) -> c_int;
     pub fn arb_mat_contains_fmpq_mat(
         mat1: *mut arb_mat_struct,
         mat2: *mut fmpq_mat_struct,
@@ -91,21 +75,9 @@ extern "C" {
     pub fn arb_mat_ones(mat: *mut arb_mat_struct);
     pub fn arb_mat_indeterminate(mat: *mut arb_mat_struct);
     pub fn arb_mat_hilbert(mat: *mut arb_mat_struct, prec: mp_limb_signed_t);
-    pub fn arb_mat_pascal(
-        mat: *mut arb_mat_struct,
-        triangular: c_int,
-        prec: mp_limb_signed_t,
-    );
-    pub fn arb_mat_stirling(
-        mat: *mut arb_mat_struct,
-        kind: c_int,
-        prec: mp_limb_signed_t,
-    );
-    pub fn arb_mat_dct(
-        mat: *mut arb_mat_struct,
-        type_: c_int,
-        prec: mp_limb_signed_t,
-    );
+    pub fn arb_mat_pascal(mat: *mut arb_mat_struct, triangular: c_int, prec: mp_limb_signed_t);
+    pub fn arb_mat_stirling(mat: *mut arb_mat_struct, kind: c_int, prec: mp_limb_signed_t);
+    pub fn arb_mat_dct(mat: *mut arb_mat_struct, type_: c_int, prec: mp_limb_signed_t);
     pub fn arb_mat_transpose(mat1: *mut arb_mat_struct, mat2: *mut arb_mat_struct);
     pub fn arb_mat_bound_inf_norm(b: *mut mag_struct, A: *mut arb_mat_struct);
     pub fn arb_mat_frobenius_norm(
@@ -332,10 +304,7 @@ extern "C" {
         prec: mp_limb_signed_t,
     );
     pub fn arb_mat_det(det: *mut arb_struct, A: *mut arb_mat_struct, prec: mp_limb_signed_t);
-    pub fn _arb_mat_cholesky_banachiewicz(
-        A: *mut arb_mat_struct,
-        prec: mp_limb_signed_t,
-    ) -> c_int;
+    pub fn _arb_mat_cholesky_banachiewicz(A: *mut arb_mat_struct, prec: mp_limb_signed_t) -> c_int;
     pub fn arb_mat_cho(
         L: *mut arb_mat_struct,
         A: *mut arb_mat_struct,
@@ -363,14 +332,9 @@ extern "C" {
         A: *mut arb_mat_struct,
         prec: mp_limb_signed_t,
     ) -> c_int;
-    pub fn _arb_mat_ldl_inplace(
-        A: *mut arb_mat_struct,
-        prec: mp_limb_signed_t,
-    ) -> c_int;
-    pub fn _arb_mat_ldl_golub_and_van_loan(
-        A: *mut arb_mat_struct,
-        prec: mp_limb_signed_t,
-    ) -> c_int;
+    pub fn _arb_mat_ldl_inplace(A: *mut arb_mat_struct, prec: mp_limb_signed_t) -> c_int;
+    pub fn _arb_mat_ldl_golub_and_van_loan(A: *mut arb_mat_struct, prec: mp_limb_signed_t)
+        -> c_int;
     pub fn arb_mat_ldl(
         L: *mut arb_mat_struct,
         A: *mut arb_mat_struct,

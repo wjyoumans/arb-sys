@@ -2,11 +2,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use flint_sys::fmpz::fmpz;
 use crate::arb::arb_struct;
 use crate::arf::arf_struct;
-
+use flint_sys::deps::*;
+use flint_sys::fmpz::fmpz;
 
 extern "C" {
     pub fn partitions_rademacher_bound(b: *mut arf_struct, n: *mut fmpz, N: mp_limb_t);

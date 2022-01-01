@@ -2,10 +2,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use crate::mag::mag_struct;
-use crate::acb::{acb_struct, acb_ptr, acb_srcptr};
+use crate::acb::{acb_ptr, acb_srcptr, acb_struct};
 use crate::acb_poly::acb_poly_struct;
+use crate::mag::mag_struct;
+use flint_sys::deps::*;
 
 extern "C" {
     pub fn acb_hypgeom_rising_ui_rs(

@@ -3,11 +3,11 @@
 //! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::fmpz::fmpz;
 use flint_sys::fmpq::fmpq;
+use flint_sys::fmpq_poly::fmpq_poly_struct;
+use flint_sys::fmpz::fmpz;
 use flint_sys::fmpz_mat::fmpz_mat_struct;
 use flint_sys::fmpz_poly::fmpz_poly_struct;
-use flint_sys::fmpq_poly::fmpq_poly_struct;
 use flint_sys::nmod_vec::nmod_t;
 
 #[repr(C)]

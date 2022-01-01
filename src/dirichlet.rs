@@ -3,11 +3,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::dlog::dlog_precomp_struct;
 use flint_sys::deps::*;
 use flint_sys::nmod_vec::nmod_t;
 use libc::c_int;
-use crate::dlog::dlog_precomp_struct;
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -59,10 +58,7 @@ extern "C" {
     pub fn dirichlet_group_dlog_precompute(G: *mut dirichlet_group_struct, num: mp_limb_t);
     pub fn dirichlet_group_dlog_clear(G: *mut dirichlet_group_struct);
     pub fn dirichlet_conductor_ui(G: *mut dirichlet_group_struct, a: mp_limb_t) -> mp_limb_t;
-    pub fn dirichlet_parity_ui(
-        G: *mut dirichlet_group_struct,
-        a: mp_limb_t,
-    ) -> c_int;
+    pub fn dirichlet_parity_ui(G: *mut dirichlet_group_struct, a: mp_limb_t) -> c_int;
     pub fn dirichlet_order_ui(G: *mut dirichlet_group_struct, a: mp_limb_t) -> mp_limb_t;
     pub fn dirichlet_char_init(x: *mut dirichlet_char_struct, G: *mut dirichlet_group_struct);
     pub fn dirichlet_char_clear(x: *mut dirichlet_char_struct);

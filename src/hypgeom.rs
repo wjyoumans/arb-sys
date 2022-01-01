@@ -3,11 +3,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use flint_sys::fmpz_poly::fmpz_poly_t;
 use crate::arb::arb_struct;
 use crate::mag::{mag_struct, mag_t};
-
+use flint_sys::deps::*;
+use flint_sys::fmpz_poly::fmpz_poly_t;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

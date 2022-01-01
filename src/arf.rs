@@ -4,13 +4,12 @@
 
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
 use flint_sys::fmpq::fmpq;
+use flint_sys::fmpz::fmpz;
 
 use crate::fmpr::fmpr_struct;
 use crate::mag::mag_struct;
 use libc::{c_char, c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -32,7 +31,6 @@ pub union mantissa_struct {
     pub ptr: mantissa_ptr_struct,
 }
 
-
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct arf_struct {
@@ -46,14 +44,8 @@ pub type arf_ptr = *mut arf_struct;
 pub type arf_srcptr = *const arf_struct;
 
 extern "C" {
-    pub fn arf_rounds_down(
-        rnd: c_int,
-        sgnbit: c_int,
-    ) -> c_int;
-    pub fn arf_rounds_up(
-        rnd: c_int,
-        sgnbit: c_int,
-    ) -> c_int;
+    pub fn arf_rounds_down(rnd: c_int, sgnbit: c_int) -> c_int;
+    pub fn arf_rounds_up(rnd: c_int, sgnbit: c_int) -> c_int;
     pub fn arf_rnd_to_mpfr(rnd: c_int) -> mpfr_rnd_t;
     pub fn _arf_promote(x: *mut arf_struct, n: mp_size_t);
     pub fn _arf_demote(x: *mut arf_struct);
@@ -94,12 +86,7 @@ extern "C" {
     pub fn arf_init_neg_mag_shallow(z: *mut arf_struct, x: *mut mag_struct);
     pub fn arf_cmpabs_mag(x: *mut arf_struct, y: *mut mag_struct) -> c_int;
     pub fn arf_mag_cmpabs(x: *mut mag_struct, y: *mut arf_struct) -> c_int;
-    pub fn arf_set_mpn(
-        y: *mut arf_struct,
-        x: mp_srcptr,
-        xn: mp_size_t,
-        sgnbit: c_int,
-    );
+    pub fn arf_set_mpn(y: *mut arf_struct, x: mp_srcptr, xn: mp_size_t, sgnbit: c_int);
     pub fn arf_set_mpz(y: *mut arf_struct, x: *mut __mpz_struct);
     pub fn arf_set_fmpz(y: *mut arf_struct, x: *mut fmpz);
     pub fn _arf_set_round_ui(
@@ -165,11 +152,7 @@ extern "C" {
     ) -> c_int;
     pub fn arf_get_fmpr(y: *mut fmpr_struct, x: *mut arf_struct);
     pub fn arf_set_fmpr(y: *mut arf_struct, x: *mut fmpr_struct);
-    pub fn arf_get_mpfr(
-        x: *mut __mpfr_struct,
-        y: *mut arf_struct,
-        rnd: mpfr_rnd_t,
-    ) -> c_int;
+    pub fn arf_get_mpfr(x: *mut __mpfr_struct, y: *mut arf_struct, rnd: mpfr_rnd_t) -> c_int;
     pub fn arf_set_mpfr(x: *mut arf_struct, y: *mut __mpfr_struct);
     pub fn arf_equal(x: *mut arf_struct, y: *mut arf_struct) -> c_int;
     pub fn arf_equal_si(x: *mut arf_struct, y: mp_limb_signed_t) -> c_int;
@@ -213,22 +196,10 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_get_fmpz(
-        z: *mut fmpz,
-        x: *mut arf_struct,
-        rnd: c_int,
-    ) -> c_int;
+    pub fn arf_get_fmpz(z: *mut fmpz, x: *mut arf_struct, rnd: c_int) -> c_int;
     pub fn arf_get_si(x: *mut arf_struct, rnd: c_int) -> mp_limb_signed_t;
-    pub fn arf_get_fmpz_fixed_fmpz(
-        y: *mut fmpz,
-        x: *mut arf_struct,
-        e: *mut fmpz,
-    ) -> c_int;
-    pub fn arf_get_fmpz_fixed_si(
-        y: *mut fmpz,
-        x: *mut arf_struct,
-        e: mp_limb_signed_t,
-    ) -> c_int;
+    pub fn arf_get_fmpz_fixed_fmpz(y: *mut fmpz, x: *mut arf_struct, e: *mut fmpz) -> c_int;
+    pub fn arf_get_fmpz_fixed_si(y: *mut fmpz, x: *mut arf_struct, e: mp_limb_signed_t) -> c_int;
     pub fn arf_set_fmpz_2exp(x: *mut arf_struct, man: *mut fmpz, exp: *mut fmpz);
     pub fn arf_floor(z: *mut arf_struct, x: *mut arf_struct);
     pub fn arf_ceil(z: *mut arf_struct, x: *mut arf_struct);
@@ -533,12 +504,7 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_sqrt(
-        z: arf_ptr,
-        x: arf_srcptr,
-        prec: mp_limb_signed_t,
-        rnd: c_int,
-    ) -> c_int;
+    pub fn arf_sqrt(z: arf_ptr, x: arf_srcptr, prec: mp_limb_signed_t, rnd: c_int) -> c_int;
     pub fn arf_sqrt_ui(
         z: *mut arf_struct,
         x: mp_limb_t,
@@ -551,12 +517,7 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_rsqrt(
-        z: arf_ptr,
-        x: arf_srcptr,
-        prec: mp_limb_signed_t,
-        rnd: c_int,
-    ) -> c_int;
+    pub fn arf_rsqrt(z: arf_ptr, x: arf_srcptr, prec: mp_limb_signed_t, rnd: c_int) -> c_int;
     pub fn arf_root(
         z: *mut arf_struct,
         x: *mut arf_struct,
@@ -627,10 +588,7 @@ extern "C" {
     pub fn arf_get_d(x: *mut arf_struct, rnd: c_int) -> f64;
     pub fn arf_set_d(x: *mut arf_struct, v: f64);
     pub fn arf_allocated_bytes(x: *mut arf_struct) -> mp_limb_signed_t;
-    pub fn arf_load_str(
-        res: *mut arf_struct,
-        data: *const c_char,
-    ) -> c_int;
+    pub fn arf_load_str(res: *mut arf_struct, data: *const c_char) -> c_int;
     pub fn arf_dump_str(x: *mut arf_struct) -> *mut c_char;
     pub fn arf_load_file(res: *mut arf_struct, stream: *mut FILE) -> c_int;
     pub fn arf_dump_file(stream: *mut FILE, x: *mut arf_struct) -> c_int;

@@ -2,17 +2,16 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use flint_sys::flint::*;
-use flint_sys::fmpz_mat::fmpz_mat_struct;
-use flint_sys::fmpq_mat::fmpq_mat_struct;
-use crate::mag::mag_struct;
+use crate::acb::{acb_ptr, acb_srcptr, acb_struct};
+use crate::acb_poly::acb_poly_struct;
 use crate::arb::arb_struct;
 use crate::arb_mat::arb_mat_struct;
-use crate::acb::{acb_struct, acb_ptr, acb_srcptr};
-use crate::acb_poly::acb_poly_struct;
+use crate::mag::mag_struct;
+use flint_sys::deps::*;
+use flint_sys::flint::*;
+use flint_sys::fmpq_mat::fmpq_mat_struct;
+use flint_sys::fmpz_mat::fmpz_mat_struct;
 use libc::{c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -67,26 +66,11 @@ extern "C" {
         prec: mp_limb_signed_t,
     );
     pub fn acb_mat_fprintd(file: *mut FILE, mat: *mut acb_mat_struct, digits: mp_limb_signed_t);
-    pub fn acb_mat_eq(
-        mat1: *mut acb_mat_struct,
-        mat2: *mut acb_mat_struct,
-    ) -> c_int;
-    pub fn acb_mat_ne(
-        mat1: *mut acb_mat_struct,
-        mat2: *mut acb_mat_struct,
-    ) -> c_int;
-    pub fn acb_mat_equal(
-        mat1: *mut acb_mat_struct,
-        mat2: *mut acb_mat_struct,
-    ) -> c_int;
-    pub fn acb_mat_overlaps(
-        mat1: *mut acb_mat_struct,
-        mat2: *mut acb_mat_struct,
-    ) -> c_int;
-    pub fn acb_mat_contains(
-        mat1: *mut acb_mat_struct,
-        mat2: *mut acb_mat_struct,
-    ) -> c_int;
+    pub fn acb_mat_eq(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct) -> c_int;
+    pub fn acb_mat_ne(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct) -> c_int;
+    pub fn acb_mat_equal(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct) -> c_int;
+    pub fn acb_mat_overlaps(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct) -> c_int;
+    pub fn acb_mat_contains(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct) -> c_int;
     pub fn acb_mat_contains_fmpq_mat(
         mat1: *mut acb_mat_struct,
         mat2: *mut fmpq_mat_struct,
@@ -105,11 +89,7 @@ extern "C" {
     pub fn acb_mat_one(mat: *mut acb_mat_struct);
     pub fn acb_mat_ones(mat: *mut acb_mat_struct);
     pub fn acb_mat_indeterminate(mat: *mut acb_mat_struct);
-    pub fn acb_mat_dft(
-        res: *mut acb_mat_struct,
-        kind: c_int,
-        prec: mp_limb_signed_t,
-    );
+    pub fn acb_mat_dft(res: *mut acb_mat_struct, kind: c_int, prec: mp_limb_signed_t);
     pub fn acb_mat_transpose(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct);
     pub fn acb_mat_conjugate(mat1: *mut acb_mat_struct, mat2: *mut acb_mat_struct);
     pub fn acb_mat_bound_inf_norm(b: *mut mag_struct, A: *mut acb_mat_struct);

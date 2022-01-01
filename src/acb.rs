@@ -2,15 +2,14 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::arb::{arb_ptr, arb_struct};
+use crate::arf::{arf_srcptr, arf_struct};
+use crate::mag::{mag_srcptr, mag_struct};
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz::fmpz;
 use flint_sys::fmpq::fmpq;
-use crate::arf::{arf_struct, arf_srcptr};
-use crate::mag::{mag_struct, mag_srcptr};
-use crate::arb::{arb_struct, arb_ptr};
+use flint_sys::fmpz::fmpz;
 use libc::{c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Copy, Clone)]

@@ -3,10 +3,9 @@
 //! *See the [Arb documentation](https://arblib.org/).
 
 use flint_sys::deps::*;
-use flint_sys::ulong_extras::n_factor_t;
 use flint_sys::nmod_vec::nmod_t;
-use libc::{c_uint, c_int};
-
+use flint_sys::ulong_extras::n_factor_t;
+use libc::{c_int, c_uint};
 
 pub const DLOG_MODPE: c_uint = 0;
 pub const DLOG_CRT: c_uint = 1;

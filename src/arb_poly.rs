@@ -2,16 +2,15 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_srcptr, acb_struct};
+use crate::arb::{arb_ptr, arb_srcptr, arb_struct};
+use crate::arf::arf_struct;
+use crate::mag::mag_struct;
 use flint_sys::deps::*;
 use flint_sys::flint::*;
-use flint_sys::fmpz_poly::fmpz_poly_struct;
 use flint_sys::fmpq_poly::fmpq_poly_struct;
-use crate::mag::mag_struct;
-use crate::arf::arf_struct;
-use crate::acb::{acb_struct, acb_srcptr};
-use crate::arb::{arb_struct, arb_ptr, arb_srcptr};
+use flint_sys::fmpz_poly::fmpz_poly_struct;
 use libc::{c_int, FILE};
-
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -106,10 +105,8 @@ extern "C" {
         res: *mut fmpz_poly_struct,
         src: *const arb_poly_struct,
     ) -> c_int;
-    pub fn arb_poly_contains(
-        poly1: *const arb_poly_struct,
-        poly2: *const arb_poly_struct,
-    ) -> c_int;
+    pub fn arb_poly_contains(poly1: *const arb_poly_struct, poly2: *const arb_poly_struct)
+        -> c_int;
     pub fn arb_poly_contains_fmpz_poly(
         poly1: *const arb_poly_struct,
         poly2: *const fmpz_poly_struct,
@@ -118,20 +115,15 @@ extern "C" {
         poly1: *const arb_poly_struct,
         poly2: *const fmpq_poly_struct,
     ) -> c_int;
-    pub fn arb_poly_equal(
-        A: *const arb_poly_struct,
-        B: *const arb_poly_struct,
-    ) -> c_int;
+    pub fn arb_poly_equal(A: *const arb_poly_struct, B: *const arb_poly_struct) -> c_int;
     pub fn _arb_poly_overlaps(
         poly1: arb_srcptr,
         len1: mp_limb_signed_t,
         poly2: arb_srcptr,
         len2: mp_limb_signed_t,
     ) -> c_int;
-    pub fn arb_poly_overlaps(
-        poly1: *const arb_poly_struct,
-        poly2: *const arb_poly_struct,
-    ) -> c_int;
+    pub fn arb_poly_overlaps(poly1: *const arb_poly_struct, poly2: *const arb_poly_struct)
+        -> c_int;
     pub fn _arb_poly_majorant(
         res: arb_ptr,
         vec: arb_srcptr,
@@ -143,7 +135,11 @@ extern "C" {
         poly: *const arb_poly_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arb_poly_fprintd(file: *mut FILE, poly: *const arb_poly_struct, digits: mp_limb_signed_t);
+    pub fn arb_poly_fprintd(
+        file: *mut FILE,
+        poly: *const arb_poly_struct,
+        digits: mp_limb_signed_t,
+    );
     pub fn arb_poly_randtest(
         poly: *mut arb_poly_struct,
         state: *const flint_rand_s,

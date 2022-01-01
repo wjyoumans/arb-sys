@@ -2,10 +2,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use flint_sys::fmpz::{fmpz, fmpz_t};
-use flint_sys::fmpq::fmpq;
 use crate::arb::arb_t;
+use flint_sys::deps::*;
+use flint_sys::fmpq::fmpq;
+use flint_sys::fmpz::{fmpz, fmpz_t};
 
 #[repr(C)]
 #[derive(Copy, Clone)]

@@ -3,10 +3,10 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
-use flint_sys::deps::*;
-use flint_sys::ulong_extras::n_factor_t;
-use flint_sys::nmod_vec::nmod_t;
 use crate::acb::{acb_ptr, acb_srcptr};
+use flint_sys::deps::*;
+use flint_sys::nmod_vec::nmod_t;
+use flint_sys::ulong_extras::n_factor_t;
 use libc::c_int;
 
 #[repr(C)]
@@ -145,12 +145,7 @@ extern "C" {
     pub fn acb_dft_crt(w: acb_ptr, v: acb_srcptr, len: mp_limb_signed_t, prec: mp_limb_signed_t);
     pub fn acb_dft_cyc(w: acb_ptr, v: acb_srcptr, len: mp_limb_signed_t, prec: mp_limb_signed_t);
     pub fn acb_dft_rad2_inplace(v: acb_ptr, e: c_int, prec: mp_limb_signed_t);
-    pub fn acb_dft_rad2(
-        w: acb_ptr,
-        v: acb_srcptr,
-        e: c_int,
-        prec: mp_limb_signed_t,
-    );
+    pub fn acb_dft_rad2(w: acb_ptr, v: acb_srcptr, e: c_int, prec: mp_limb_signed_t);
     pub fn acb_dft_bluestein(
         w: acb_ptr,
         v: acb_srcptr,
@@ -164,11 +159,7 @@ extern "C" {
         num: mp_limb_signed_t,
         prec: mp_limb_signed_t,
     );
-    pub fn acb_dft_rad2_inplace_threaded(
-        v: acb_ptr,
-        e: c_int,
-        prec: mp_limb_signed_t,
-    );
+    pub fn acb_dft_rad2_inplace_threaded(v: acb_ptr, e: c_int, prec: mp_limb_signed_t);
     pub fn acb_dft_convol_naive(
         w: acb_ptr,
         f: acb_srcptr,

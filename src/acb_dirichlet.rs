@@ -3,14 +3,14 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use crate::acb::{acb_ptr, acb_srcptr, acb_struct, acb_t};
+use crate::acb_poly::acb_poly_struct;
+use crate::arb::{arb_ptr, arb_srcptr, arb_struct};
+use crate::arf::arf_struct;
+use crate::dirichlet::{dirichlet_char_struct, dirichlet_group_struct};
+use crate::mag::mag_struct;
 use flint_sys::deps::*;
 use flint_sys::fmpz::fmpz;
-use crate::mag::mag_struct;
-use crate::arf::arf_struct;
-use crate::arb::{arb_struct, arb_ptr, arb_srcptr};
-use crate::acb::{acb_struct, acb_t, acb_ptr, acb_srcptr};
-use crate::acb_poly::acb_poly_struct;
-use crate::dirichlet::{dirichlet_group_struct, dirichlet_char_struct};
 
 #[repr(C)]
 #[derive(Copy, Clone)]
