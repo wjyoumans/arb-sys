@@ -3,7 +3,7 @@
 //! *See the [Arb documentation](https://arblib.org/).
 
 use crate::acb::{acb_srcptr, acb_struct};
-use crate::arb::{arb_ptr, arb_srcptr, arb_struct};
+use crate::arb::*;
 use crate::arf::arf_struct;
 use crate::mag::mag_struct;
 use flint_sys::deps::*;
@@ -1506,3 +1506,25 @@ extern "C" {
     );
     pub fn arb_poly_root_bound_fujiwara(bound: *mut mag_struct, poly: *mut arb_poly_struct);
 }
+
+pub unsafe fn arb_poly_length(poly: *const arb_poly_struct) -> mp_limb_signed_t {
+    (*poly).length
+}
+
+pub unsafe fn arb_poly_degree(poly: *const arb_poly_struct) -> mp_limb_signed_t {
+    (*poly).length - 1
+}
+
+pub unsafe fn arb_poly_is_zero(poly: *const arb_poly_struct) -> bool {
+    (*poly).length == 0
+}
+
+pub unsafe fn arb_poly_is_one(poly: *const arb_poly_struct) -> bool {
+    ((*poly).length == 1) && (arb_is_one((*poly).coeffs) != 0)
+}
+
+/*
+pub unsafe fn arb_poly_is_x(poly: *const arb_poly_struct) -> bool {
+    ((*poly).length == 2) && (arb_is_zero((*poly).coeffs) != 0) 
+        && (arb_is_one((*poly).coeffs + 1) != 0)
+}*/
