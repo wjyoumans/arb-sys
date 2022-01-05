@@ -55,40 +55,40 @@ extern "C" {
     pub fn arf_pos_inf(x: *mut arf_struct);
     pub fn arf_neg_inf(x: *mut arf_struct);
     pub fn arf_nan(x: *mut arf_struct);
-    pub fn arf_is_special(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_zero(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_pos_inf(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_neg_inf(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_nan(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_normal(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_finite(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_inf(x: *mut arf_struct) -> c_int;
+    pub fn arf_is_special(x: *const arf_struct) -> c_int;
+    pub fn arf_is_zero(x: *const arf_struct) -> c_int;
+    pub fn arf_is_pos_inf(x: *const arf_struct) -> c_int;
+    pub fn arf_is_neg_inf(x: *const arf_struct) -> c_int;
+    pub fn arf_is_nan(x: *const arf_struct) -> c_int;
+    pub fn arf_is_normal(x: *const arf_struct) -> c_int;
+    pub fn arf_is_finite(x: *const arf_struct) -> c_int;
+    pub fn arf_is_inf(x: *const arf_struct) -> c_int;
     pub fn arf_one(x: *mut arf_struct);
-    pub fn arf_is_one(x: *mut arf_struct) -> c_int;
-    pub fn arf_sgn(x: *mut arf_struct) -> c_int;
-    pub fn arf_cmp(x: *mut arf_struct, y: *mut arf_struct) -> c_int;
-    pub fn arf_cmpabs(x: *mut arf_struct, y: *mut arf_struct) -> c_int;
-    pub fn arf_cmpabs_ui(x: *mut arf_struct, y: mp_limb_t) -> c_int;
-    pub fn arf_cmpabs_d(x: *mut arf_struct, y: f64) -> c_int;
-    pub fn arf_cmp_si(x: *mut arf_struct, y: mp_limb_signed_t) -> c_int;
-    pub fn arf_cmp_ui(x: *mut arf_struct, y: mp_limb_t) -> c_int;
-    pub fn arf_cmp_d(x: *mut arf_struct, y: f64) -> c_int;
+    pub fn arf_is_one(x: *const arf_struct) -> c_int;
+    pub fn arf_sgn(x: *const arf_struct) -> c_int;
+    pub fn arf_cmp(x: *const arf_struct, y: *const arf_struct) -> c_int;
+    pub fn arf_cmpabs(x: *const arf_struct, y: *const arf_struct) -> c_int;
+    pub fn arf_cmpabs_ui(x: *const arf_struct, y: mp_limb_t) -> c_int;
+    pub fn arf_cmpabs_d(x: *const arf_struct, y: f64) -> c_int;
+    pub fn arf_cmp_si(x: *const arf_struct, y: mp_limb_signed_t) -> c_int;
+    pub fn arf_cmp_ui(x: *const arf_struct, y: mp_limb_t) -> c_int;
+    pub fn arf_cmp_d(x: *const arf_struct, y: f64) -> c_int;
     pub fn arf_swap(y: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_set(y: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_neg(y: *mut arf_struct, x: *mut arf_struct);
+    pub fn arf_set(y: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_neg(y: *mut arf_struct, x: *const arf_struct);
     pub fn arf_init_set_ui(x: *mut arf_struct, v: mp_limb_t);
     pub fn arf_init_set_si(x: *mut arf_struct, v: mp_limb_signed_t);
     pub fn arf_set_ui(x: *mut arf_struct, v: mp_limb_t);
     pub fn arf_set_si(x: *mut arf_struct, v: mp_limb_signed_t);
-    pub fn arf_init_set_shallow(z: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_init_neg_shallow(z: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_init_set_mag_shallow(y: *mut arf_struct, x: *mut mag_struct);
-    pub fn arf_init_neg_mag_shallow(z: *mut arf_struct, x: *mut mag_struct);
-    pub fn arf_cmpabs_mag(x: *mut arf_struct, y: *mut mag_struct) -> c_int;
-    pub fn arf_mag_cmpabs(x: *mut mag_struct, y: *mut arf_struct) -> c_int;
+    pub fn arf_init_set_shallow(z: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_init_neg_shallow(z: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_init_set_mag_shallow(y: *mut arf_struct, x: *const mag_struct);
+    pub fn arf_init_neg_mag_shallow(z: *mut arf_struct, x: *const mag_struct);
+    pub fn arf_cmpabs_mag(x: *const arf_struct, y: *const mag_struct) -> c_int;
+    pub fn arf_mag_cmpabs(x: *const mag_struct, y: *const arf_struct) -> c_int;
     pub fn arf_set_mpn(y: *mut arf_struct, x: mp_srcptr, xn: mp_size_t, sgnbit: c_int);
-    pub fn arf_set_mpz(y: *mut arf_struct, x: *mut __mpz_struct);
-    pub fn arf_set_fmpz(y: *mut arf_struct, x: *mut fmpz);
+    pub fn arf_set_mpz(y: *mut arf_struct, x: *const __mpz_struct);
+    pub fn arf_set_fmpz(y: *mut arf_struct, x: *const fmpz);
     pub fn _arf_set_round_ui(
         x: *mut arf_struct,
         v: mp_limb_t,
@@ -128,59 +128,68 @@ extern "C" {
     ) -> c_int;
     pub fn arf_set_round_mpz(
         y: *mut arf_struct,
-        x: *mut __mpz_struct,
+        x: *const __mpz_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_set_round_fmpz(
         y: *mut arf_struct,
-        x: *mut fmpz,
+        x: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_set_round(
         y: *mut arf_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_neg_round(
         y: *mut arf_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_get_fmpr(y: *mut fmpr_struct, x: *mut arf_struct);
-    pub fn arf_set_fmpr(y: *mut arf_struct, x: *mut fmpr_struct);
-    pub fn arf_get_mpfr(x: *mut __mpfr_struct, y: *mut arf_struct, rnd: mpfr_rnd_t) -> c_int;
-    pub fn arf_set_mpfr(x: *mut arf_struct, y: *mut __mpfr_struct);
-    pub fn arf_equal(x: *mut arf_struct, y: *mut arf_struct) -> c_int;
-    pub fn arf_equal_si(x: *mut arf_struct, y: mp_limb_signed_t) -> c_int;
-    pub fn arf_min(z: *mut arf_struct, a: *mut arf_struct, b: *mut arf_struct);
-    pub fn arf_max(z: *mut arf_struct, a: *mut arf_struct, b: *mut arf_struct);
-    pub fn arf_abs(y: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_bits(x: *mut arf_struct) -> mp_limb_signed_t;
-    pub fn arf_bot(e: *mut fmpz, x: *mut arf_struct);
-    pub fn arf_is_int(x: *mut arf_struct) -> c_int;
-    pub fn arf_is_int_2exp_si(x: *mut arf_struct, e: mp_limb_signed_t) -> c_int;
-    pub fn arf_cmp_2exp_si(x: *mut arf_struct, e: mp_limb_signed_t) -> c_int;
-    pub fn arf_cmpabs_2exp_si(x: *mut arf_struct, e: mp_limb_signed_t) -> c_int;
+    pub fn arf_get_fmpr(y: *mut fmpr_struct, x: *const arf_struct);
+    pub fn arf_set_fmpr(y: *mut arf_struct, x: *const fmpr_struct);
+    pub fn arf_get_mpfr(x: *mut __mpfr_struct, y: *const arf_struct,
+                        rnd: mpfr_rnd_t) -> c_int;
+    pub fn arf_set_mpfr(x: *mut arf_struct, y: *const __mpfr_struct);
+    pub fn arf_equal(x: *const arf_struct, y: *const arf_struct) -> c_int;
+    pub fn arf_equal_si(x: *const arf_struct, y: mp_limb_signed_t) -> c_int;
+    pub fn arf_min(z: *mut arf_struct,
+                   a: *const arf_struct, b: *const arf_struct);
+    pub fn arf_max(z: *mut arf_struct,
+                   a: *const arf_struct, b: *const arf_struct);
+    pub fn arf_abs(y: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_bits(x: *const arf_struct) -> mp_limb_signed_t;
+    pub fn arf_bot(e: *mut fmpz, x: *const arf_struct);
+    pub fn arf_is_int(x: *const arf_struct) -> c_int;
+    pub fn arf_is_int_2exp_si(x: *const arf_struct, e: mp_limb_signed_t)
+                              -> c_int;
+    pub fn arf_cmp_2exp_si(x: *const arf_struct, e: mp_limb_signed_t) -> c_int;
+    pub fn arf_cmpabs_2exp_si(x: *const arf_struct, e: mp_limb_signed_t)
+                              -> c_int;
     pub fn arf_set_si_2exp_si(x: *mut arf_struct, man: mp_limb_signed_t, exp: mp_limb_signed_t);
     pub fn arf_set_ui_2exp_si(x: *mut arf_struct, man: mp_limb_t, exp: mp_limb_signed_t);
-    pub fn arf_mul_2exp_si(y: *mut arf_struct, x: *mut arf_struct, e: mp_limb_signed_t);
-    pub fn arf_mul_2exp_fmpz(y: *mut arf_struct, x: *mut arf_struct, e: *mut fmpz);
+    pub fn arf_mul_2exp_si(y: *mut arf_struct, x: *const arf_struct,
+                           e: mp_limb_signed_t);
+    pub fn arf_mul_2exp_fmpz(y: *mut arf_struct, x: *const arf_struct,
+                             e: *const fmpz);
     pub fn arf_set_round_fmpz_2exp(
         y: *mut arf_struct,
-        x: *mut fmpz,
-        exp: *mut fmpz,
+        x: *const fmpz,
+        exp: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_abs_bound_lt_2exp_fmpz(b: *mut fmpz, x: *mut arf_struct);
-    pub fn arf_abs_bound_le_2exp_fmpz(b: *mut fmpz, x: *mut arf_struct);
-    pub fn arf_abs_bound_lt_2exp_si(x: *mut arf_struct) -> mp_limb_signed_t;
-    pub fn arf_frexp(man: *mut arf_struct, exp: *mut fmpz, x: *mut arf_struct);
-    pub fn arf_get_fmpz_2exp(man: *mut fmpz, exp: *mut fmpz, x: *mut arf_struct);
+    pub fn arf_abs_bound_lt_2exp_fmpz(b: *mut fmpz, x: *const arf_struct);
+    pub fn arf_abs_bound_le_2exp_fmpz(b: *mut fmpz, x: *const arf_struct);
+    pub fn arf_abs_bound_lt_2exp_si(x: *const arf_struct) -> mp_limb_signed_t;
+    pub fn arf_frexp(man: *mut arf_struct, exp: *mut fmpz,
+                     x: *const arf_struct);
+    pub fn arf_get_fmpz_2exp(man: *mut fmpz, exp: *mut fmpz,
+                             x: *const arf_struct);
     pub fn _arf_get_integer_mpn(
         y: mp_ptr,
         x: mp_srcptr,
@@ -196,18 +205,23 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_get_fmpz(z: *mut fmpz, x: *mut arf_struct, rnd: c_int) -> c_int;
-    pub fn arf_get_si(x: *mut arf_struct, rnd: c_int) -> mp_limb_signed_t;
-    pub fn arf_get_fmpz_fixed_fmpz(y: *mut fmpz, x: *mut arf_struct, e: *mut fmpz) -> c_int;
-    pub fn arf_get_fmpz_fixed_si(y: *mut fmpz, x: *mut arf_struct, e: mp_limb_signed_t) -> c_int;
-    pub fn arf_set_fmpz_2exp(x: *mut arf_struct, man: *mut fmpz, exp: *mut fmpz);
-    pub fn arf_floor(z: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_ceil(z: *mut arf_struct, x: *mut arf_struct);
-    pub fn arf_debug(x: *mut arf_struct);
-    pub fn arf_fprint(file: *mut FILE, x: *mut arf_struct);
-    pub fn arf_fprintd(file: *mut FILE, y: *mut arf_struct, d: mp_limb_signed_t);
-    pub fn arf_print(x: *mut arf_struct);
-    pub fn arf_printd(y: *mut arf_struct, d: mp_limb_signed_t);
+    pub fn arf_get_fmpz(z: *mut fmpz, x: *const arf_struct, rnd: c_int) -> c_int;
+    pub fn arf_get_si(x: *const arf_struct, rnd: c_int) -> mp_limb_signed_t;
+    pub fn arf_get_fmpz_fixed_fmpz(y: *mut fmpz,
+                                   x: *const arf_struct,
+                                   e: *const fmpz) -> c_int;
+    pub fn arf_get_fmpz_fixed_si(y: *mut fmpz, x: *const arf_struct,
+                                 e: mp_limb_signed_t) -> c_int;
+    pub fn arf_set_fmpz_2exp(x: *mut arf_struct,
+                             man: *const fmpz, exp: *const fmpz);
+    pub fn arf_floor(z: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_ceil(z: *mut arf_struct, x: *const arf_struct);
+    pub fn arf_debug(x: *const arf_struct);
+    pub fn arf_fprint(file: *mut FILE, x: *const arf_struct);
+    pub fn arf_fprintd(file: *mut FILE, y: *const arf_struct,
+                       d: mp_limb_signed_t);
+    pub fn arf_print(x: *const arf_struct);
+    pub fn arf_printd(y: *const arf_struct, d: mp_limb_signed_t);
     pub fn arf_randtest(
         x: *mut arf_struct,
         state: *mut flint_rand_s,
@@ -235,11 +249,12 @@ extern "C" {
     pub static mut __arf_mul_tmp: mp_ptr;
     pub static mut __arf_mul_alloc: mp_limb_signed_t;
     pub fn _arf_mul_tmp_cleanup();
-    pub fn arf_mul_special(z: *mut arf_struct, x: *mut arf_struct, y: *mut arf_struct);
+    pub fn arf_mul_special(z: *mut arf_struct,
+                           x: *const arf_struct, y: *const arf_struct);
     pub fn arf_mul_via_mpfr(
         z: *mut arf_struct,
-        x: *mut arf_struct,
-        y: *mut arf_struct,
+        x: *const arf_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -258,8 +273,8 @@ extern "C" {
     ) -> c_int;
     pub fn arf_neg_mul(
         z: *mut arf_struct,
-        x: *mut arf_struct,
-        y: *mut arf_struct,
+        x: *const arf_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -280,14 +295,14 @@ extern "C" {
     pub fn arf_mul_mpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut __mpz_struct,
+        y: *const __mpz_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_mul_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -299,7 +314,7 @@ extern "C" {
         xp: mp_srcptr,
         xn: mp_size_t,
         xsgnbit: c_int,
-        xexp: *mut fmpz,
+        xexp: *const fmpz,
         yp: mp_srcptr,
         yn: mp_size_t,
         ysgnbit: c_int,
@@ -331,15 +346,15 @@ extern "C" {
     pub fn arf_add_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_add_fmpz_2exp(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
-        exp: *mut fmpz,
+        y: *const fmpz,
+        exp: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -367,7 +382,7 @@ extern "C" {
     pub fn arf_sub_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -395,14 +410,14 @@ extern "C" {
     pub fn arf_addmul_mpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut __mpz_struct,
+        y: *const __mpz_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_addmul_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -430,21 +445,21 @@ extern "C" {
     pub fn arf_submul_mpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut __mpz_struct,
+        y: *const __mpz_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_submul_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_sosq(
         z: *mut arf_struct,
-        x: *mut arf_struct,
-        y: *mut arf_struct,
+        x: *const arf_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -486,21 +501,21 @@ extern "C" {
     pub fn arf_div_fmpz(
         z: arf_ptr,
         x: arf_srcptr,
-        y: *mut fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_fmpz_div(
         z: arf_ptr,
-        x: *mut fmpz,
+        x: *const fmpz,
         y: arf_srcptr,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_fmpz_div_fmpz(
         z: arf_ptr,
-        x: *mut fmpz,
-        y: *mut fmpz,
+        x: *const fmpz,
+        y: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -513,68 +528,69 @@ extern "C" {
     ) -> c_int;
     pub fn arf_sqrt_fmpz(
         z: *mut arf_struct,
-        x: *mut fmpz,
+        x: *const fmpz,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_rsqrt(z: arf_ptr, x: arf_srcptr, prec: mp_limb_signed_t, rnd: c_int) -> c_int;
     pub fn arf_root(
         z: *mut arf_struct,
-        x: *mut arf_struct,
+        x: *const arf_struct,
         k: mp_limb_t,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_get_mag(y: *mut mag_struct, x: *mut arf_struct);
-    pub fn arf_get_mag_lower(y: *mut mag_struct, x: *mut arf_struct);
-    pub fn arf_set_mag(y: *mut arf_struct, x: *mut mag_struct);
-    pub fn mag_init_set_arf(y: *mut mag_struct, x: *mut arf_struct);
-    pub fn mag_fast_init_set_arf(y: *mut mag_struct, x: *mut arf_struct);
+    pub fn arf_get_mag(y: *mut mag_struct, x: *const arf_struct);
+    pub fn arf_get_mag_lower(y: *mut mag_struct, x: *const arf_struct);
+    pub fn arf_set_mag(y: *mut arf_struct, x: *const mag_struct);
+    pub fn mag_init_set_arf(y: *mut mag_struct, x: *const arf_struct);
+    pub fn mag_fast_init_set_arf(y: *mut mag_struct, x: *const arf_struct);
     pub fn arf_mag_fast_add_ulp(
         z: *mut mag_struct,
-        x: *mut mag_struct,
-        y: *mut arf_struct,
+        x: *const mag_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
     pub fn arf_mag_add_ulp(
         z: *mut mag_struct,
-        x: *mut mag_struct,
-        y: *mut arf_struct,
+        x: *const mag_struct,
+        y: *const arf_struct,
         prec: mp_limb_signed_t,
     );
-    pub fn arf_mag_set_ulp(z: *mut mag_struct, y: *mut arf_struct, prec: mp_limb_signed_t);
-    pub fn arf_get_fmpq(y: *mut fmpq, x: *mut arf_struct);
+    pub fn arf_mag_set_ulp(z: *mut mag_struct, y: *const arf_struct,
+                           prec: mp_limb_signed_t);
+    pub fn arf_get_fmpq(y: *mut fmpq, x: *const arf_struct);
     pub fn arf_set_fmpq(
         y: *mut arf_struct,
-        x: *mut fmpq,
+        x: *const fmpq,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_complex_mul(
         e: *mut arf_struct,
         f: *mut arf_struct,
-        a: *mut arf_struct,
-        b: *mut arf_struct,
-        c: *mut arf_struct,
-        d: *mut arf_struct,
+        a: *const arf_struct,
+        b: *const arf_struct,
+        c: *const arf_struct,
+        d: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_complex_mul_fallback(
         e: *mut arf_struct,
         f: *mut arf_struct,
-        a: *mut arf_struct,
-        b: *mut arf_struct,
-        c: *mut arf_struct,
-        d: *mut arf_struct,
+        a: *const arf_struct,
+        b: *const arf_struct,
+        c: *const arf_struct,
+        d: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
     pub fn arf_complex_sqr(
         e: *mut arf_struct,
         f: *mut arf_struct,
-        a: *mut arf_struct,
-        b: *mut arf_struct,
+        a: *const arf_struct,
+        b: *const arf_struct,
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
@@ -585,11 +601,11 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
-    pub fn arf_get_d(x: *mut arf_struct, rnd: c_int) -> f64;
+    pub fn arf_get_d(x: *const arf_struct, rnd: c_int) -> f64;
     pub fn arf_set_d(x: *mut arf_struct, v: f64);
-    pub fn arf_allocated_bytes(x: *mut arf_struct) -> mp_limb_signed_t;
+    pub fn arf_allocated_bytes(x: *const arf_struct) -> mp_limb_signed_t;
     pub fn arf_load_str(res: *mut arf_struct, data: *const c_char) -> c_int;
-    pub fn arf_dump_str(x: *mut arf_struct) -> *mut c_char;
+    pub fn arf_dump_str(x: *const arf_struct) -> *mut c_char;
     pub fn arf_load_file(res: *mut arf_struct, stream: *mut FILE) -> c_int;
-    pub fn arf_dump_file(stream: *mut FILE, x: *mut arf_struct) -> c_int;
+    pub fn arf_dump_file(stream: *mut FILE, x: *const arf_struct) -> c_int;
 }
