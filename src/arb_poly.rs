@@ -1525,6 +1525,6 @@ pub unsafe fn arb_poly_is_one(poly: *const arb_poly_struct) -> bool {
 
 /*
 pub unsafe fn arb_poly_is_x(poly: *const arb_poly_struct) -> bool {
-    ((*poly).length == 2) && (arb_is_zero((*poly).coeffs) != 0) 
+    ((*poly).length == 2) && (arb_is_zero((*poly).coeffs) != 0)
         && (arb_is_one((*poly).coeffs + 1) != 0)
 }*/
