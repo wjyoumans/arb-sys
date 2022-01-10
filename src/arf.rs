@@ -593,3 +593,54 @@ extern "C" {
     pub fn arf_load_file(res: *mut arf_struct, stream: *mut FILE) -> c_int;
     pub fn arf_dump_file(stream: *mut FILE, x: *const arf_struct) -> c_int;
 }
+
+// Manual implementations of macro-defined functions
+
+#[inline]
+pub unsafe fn arf_mul(
+    z: arf_ptr,
+    x: arf_srcptr,
+    y: arf_srcptr,
+    prec: mp_limb_signed_t,
+    rnd: c_int) -> c_int 
+{
+    if rnd == crate::FMPR_RND_DOWN {
+        arf_mul_rnd_down(z, x, y, prec)
+    } else {
+        arf_mul_rnd_any(z, x, y, prec, rnd)
+    } 
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::mem::MaybeUninit;
+    use libc::c_long;
+    use quickcheck::quickcheck;
+
+    quickcheck! {
+        fn test_arf_mul(x_int: c_int, y_int: c_int) -> bool {
+            let mut x = MaybeUninit::uninit();
+            let mut y = MaybeUninit::uninit();
+            let mut z = MaybeUninit::uninit();
+
+            unsafe {
+                let x_long = x_int as c_long;
+                let y_long = y_int as c_long;
+
+                arf_init_set_si(x.as_mut_ptr(), x_long);
+                arf_init_set_si(y.as_mut_ptr(), y_long);
+                arf_init(z.as_mut_ptr());
+                
+                arf_mul(z.as_mut_ptr(), x.as_ptr(), y.as_ptr(), 130, crate::ARF_RND_NEAR);
+                let res = arf_equal_si(z.as_ptr(), x_long*y_long);
+                
+                arf_clear(x.as_mut_ptr());
+                arf_clear(y.as_mut_ptr());
+                arf_clear(z.as_mut_ptr());
+
+                res != 0
+            }
+        }
+    }
+}
