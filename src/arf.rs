@@ -263,6 +263,13 @@ extern "C" {
         prec: mp_limb_signed_t,
         rnd: c_int,
     ) -> c_int;
+    pub fn arf_mul(
+        z: arf_ptr,
+        x: arf_srcptr,
+        y: arf_srcptr,
+        prec: mp_limb_signed_t,
+        rnd: c_int,
+    ) -> c_int;
     pub fn arf_mul_ui(
         z: arf_ptr,
         x: arf_srcptr,
