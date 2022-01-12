@@ -1,6 +1,6 @@
 //! Bindings for the [ARB](https://arblib.org/) library.
 
-use libc::c_int;
+use libc::{c_int, c_ulong};
 
 // Constants
 pub const FMPR_RND_DOWN: c_int = 0;
@@ -29,6 +29,9 @@ pub const __ARB_VERSION_MINOR: c_int = 20;
 pub const __ARB_VERSION_PATCHLEVEL: c_int = 0;
 pub const ARB_VERSION: &'static [u8; 7usize] = b"2.20.0\0";
 pub const __ARB_RELEASE: c_int = 22000;
+pub const ARB_STR_MORE: c_ulong = 1;
+pub const ARB_STR_NO_RADIUS: c_ulong = 2;
+pub const ARB_STR_CONDENSE: c_ulong = 16;
 pub const ARB_RND: c_int = 0;
 pub const ARB_ATAN_TAB1_BITS: c_int = 8;
 pub const ARB_ATAN_TAB1_PREC: c_int = 512;
