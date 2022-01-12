@@ -83,10 +83,10 @@ extern "C" {
                                 x: *const mag_struct, e: mp_limb_signed_t);
     pub fn mag_set_d(z: *mut mag_struct, x: f64);
     pub fn mag_set_d_lower(z: *mut mag_struct, x: f64);
-    pub fn mag_set_d_2exp_fmpz(z: *mut mag_struct, c: f64, exp: *mut fmpz);
-    pub fn mag_set_d_2exp_fmpz_lower(z: *mut mag_struct, c: f64, exp: *mut fmpz);
-    pub fn mag_set_fmpz_2exp_fmpz(z: *mut mag_struct, man: *mut fmpz, exp: *mut fmpz);
-    pub fn mag_set_fmpr(x: *mut mag_struct, y: *mut fmpr_struct);
+    pub fn mag_set_d_2exp_fmpz(z: *mut mag_struct, c: f64, exp: *const fmpz);
+    pub fn mag_set_d_2exp_fmpz_lower(z: *mut mag_struct, c: f64, exp: *const fmpz);
+    pub fn mag_set_fmpz_2exp_fmpz(z: *mut mag_struct, man: *const fmpz, exp: *const fmpz);
+    pub fn mag_set_fmpr(x: *mut mag_struct, y: *const fmpr_struct);
     pub fn mag_get_fmpr(x: *mut fmpr_struct, r: *const mag_struct);
     pub fn mag_randtest_special(
         x: *mut mag_struct,
@@ -95,9 +95,9 @@ extern "C" {
     );
     pub fn mag_randtest(x: *mut mag_struct, state: *mut flint_rand_s, expbits: mp_limb_signed_t);
     pub fn mag_fprint(file: *mut FILE, x: *const mag_struct);
-    pub fn mag_fprintd(file: *mut FILE, x: *mut mag_struct, d: mp_limb_signed_t);
+    pub fn mag_fprintd(file: *mut FILE, x: *const mag_struct, d: mp_limb_signed_t);
     pub fn mag_print(x: *const mag_struct);
-    pub fn mag_printd(x: *mut mag_struct, d: mp_limb_signed_t);
+    pub fn mag_printd(x: *const mag_struct, d: mp_limb_signed_t);
     pub fn mag_get_fmpq(y: *mut fmpq, x: *const mag_struct);
     pub fn mag_get_fmpz(res: *mut fmpz, x: *const mag_struct);
     pub fn mag_get_fmpz_lower(res: *mut fmpz, x: *const mag_struct);
@@ -144,7 +144,7 @@ extern "C" {
     pub fn mag_rfac_ui(z: *mut mag_struct, n: mp_limb_t);
     pub fn mag_bin_uiui(res: *mut mag_struct, n: mp_limb_t, k: mp_limb_t);
     pub fn mag_bernoulli_div_fac_ui(z: *mut mag_struct, n: mp_limb_t);
-    pub fn mag_set_fmpz_2exp_fmpz_lower(z: *mut mag_struct, man: *mut fmpz, exp: *mut fmpz);
+    pub fn mag_set_fmpz_2exp_fmpz_lower(z: *mut mag_struct, man: *const fmpz, exp: *const fmpz);
     pub fn mag_sqrt(y: *mut mag_struct, x: *const mag_struct);
     pub fn mag_sqrt_lower(y: *mut mag_struct, x: *const mag_struct);
     pub fn mag_rsqrt(y: *mut mag_struct, x: *const mag_struct);
@@ -166,8 +166,8 @@ extern "C" {
     pub fn mag_set_ui(z: *mut mag_struct, x: mp_limb_t);
     pub fn mag_set_ui_lower(z: *mut mag_struct, x: mp_limb_t);
     pub fn mag_set_ui_2exp_si(z: *mut mag_struct, v: mp_limb_t, e: mp_limb_signed_t);
-    pub fn mag_set_fmpz(z: *mut mag_struct, x: *mut fmpz);
-    pub fn mag_set_fmpz_lower(z: *mut mag_struct, x: *mut fmpz);
+    pub fn mag_set_fmpz(z: *mut mag_struct, x: *const fmpz);
+    pub fn mag_set_fmpz_lower(z: *mut mag_struct, x: *const fmpz);
     pub fn mag_mul_ui(z: *mut mag_struct,
                       x: *const mag_struct, y: mp_limb_t);
     pub fn mag_mul_ui_lower(z: *mut mag_struct,
@@ -183,6 +183,6 @@ extern "C" {
     pub fn mag_allocated_bytes(x: *const mag_struct) -> mp_limb_signed_t;
     pub fn mag_load_str(res: *mut mag_struct, data: *const c_char) -> c_int;
     pub fn mag_dump_str(x: *const mag_struct) -> *mut c_char;
-    pub fn mag_load_file(res: *mut mag_struct, stream: *mut FILE) -> c_int;
+    pub fn mag_load_file(res: *mut mag_struct, stream: *const FILE) -> c_int;
     pub fn mag_dump_file(stream: *mut FILE, x: *const mag_struct) -> c_int;
 }
