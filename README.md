@@ -4,6 +4,10 @@ Rust bindings to the [Arb](https://arblib.org) library.
 
 Arb is a C library for rigorous real and complex arithmetic with arbitrary precision.
 
+## Usage
+
+See the [documentation](https://docs.rs/arb-sys/latest/arb_sys/). This crate is available on [crates.io](https://crates.io/crates/arb-sys).
+
 ## Optional features
 
   * `disable-make-check`: this can reduce compilation time significantly.

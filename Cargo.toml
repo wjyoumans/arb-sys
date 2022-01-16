@@ -13,8 +13,7 @@ readme = "README.md"
 
 [dependencies]
 libc = "0.2"
-#flint-sys = { version = "0.6", features = ["disable-make-check"] }
-flint-sys = { path = "../flint-rs/flint-sys", features = ["disable-make-check"] }
+flint-sys = { version = "0.6", features = ["disable-make-check"] }
 
 [dev-dependencies]
 quickcheck = "1.0"
