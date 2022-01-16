@@ -1,6 +1,6 @@
 [package]
 name = "arb-sys"
-version = "0.2.8"
+version = "0.3.0"
 authors = ["William Youmans <wyoumans@usf.edu>"]
 edition = "2018"
 description = "Bindings to the Arb library"
@@ -13,9 +13,16 @@ readme = "README.md"
 
 [dependencies]
 libc = "0.2"
-flint-sys = "0.5"
-#flint-sys = { path = "../flint-rs/flint-sys" }
+#flint-sys = { version = "0.6", features = ["disable-make-check"] }
+flint-sys = { path = "../flint-rs/flint-sys", features = ["disable-make-check"] }
 
 [dev-dependencies]
 quickcheck = "1.0"
 quickcheck_macros = "1.0"
+
+[features]
+disable-make-check = []
+
+[target.'cfg(target_os = "windows")'.build-dependencies.winapi]
+version = "0.3"
+features = ["combaseapi", "knownfolders", "shlobj", "winbase", "winerror"]
