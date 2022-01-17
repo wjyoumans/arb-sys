@@ -52,6 +52,7 @@ enum Target {
 
 struct Environment {
     target: Target,
+    gmp_mpfr_dir: PathBuf,
     flint_dir: PathBuf,
     src_dir: PathBuf,
     out_dir: PathBuf,
@@ -81,6 +82,7 @@ fn main() {
         Target::Other
     };
 
+    let gmp_mpfr_dir = PathBuf::from(cargo_env("DEP_GMP_OUT_DIR"));
     let flint_dir = PathBuf::from(cargo_env("DEP_FLINT_OUT_DIR"));
     let src_dir = PathBuf::from(cargo_env("CARGO_MANIFEST_DIR"));
     let out_dir = PathBuf::from(cargo_env("OUT_DIR"));
@@ -100,6 +102,7 @@ fn main() {
 
     let env = Environment {
         target,
+        gmp_mpfr_dir,
         flint_dir,
         src_dir,
         out_dir: out_dir.clone(),
@@ -191,7 +194,8 @@ fn build(env: &Environment) {
     println!("$ cd {:?}", &env.build_dir);
     let conf = String::from(
         format!(
-            "./configure --disable-shared --with-flint={}",
+            "./configure --disable-shared --with-gmp={} --with-flint={}",
+            env.gmp_mpfr_dir.display(),
             env.flint_dir.display(),
             )
         );
@@ -231,6 +235,8 @@ fn write_link_info(env: &Environment) {
     println!("cargo:lib_dir={}", lib_str);
     println!("cargo:include_dir={}", include_str);
     println!("cargo:rustc-link-search=native={}", lib_str);
+    println!("cargo:rustc-link-lib=static=gmp");
+    println!("cargo:rustc-link-lib=static=mpfr");
     println!("cargo:rustc-link-lib=static=flint");
     println!("cargo:rustc-link-lib=static=arb");
 }

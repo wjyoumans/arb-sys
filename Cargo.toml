@@ -1,6 +1,6 @@
 [package]
 name = "arb-sys"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["William Youmans <wyoumans@usf.edu>"]
 edition = "2018"
 description = "Bindings to the Arb library"
@@ -13,6 +13,7 @@ readme = "README.md"
 
 [dependencies]
 libc = "0.2"
+gmp-mpfr-sys = "1.4"
 flint-sys = { version = "0.6", features = ["disable-make-check"] }
 
 [dev-dependencies]
