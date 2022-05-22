@@ -16,10 +16,6 @@ libc = "0.2"
 gmp-mpfr-sys = "1.4"
 flint-sys = { version = "0.6", features = ["disable-make-check"] }
 
-[dev-dependencies]
-quickcheck = "1.0"
-quickcheck_macros = "1.0"
-
 [features]
 disable-make-check = []
 
