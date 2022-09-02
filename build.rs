@@ -88,10 +88,14 @@ fn main() {
     let out_dir = PathBuf::from(cargo_env("OUT_DIR"));
 
     println!("cargo:rerun-if-env-changed=ARB_SYS_CACHE");
-    let cache_dir = match env::var_os("ARB_SYS_CACHE") {
-        Some(ref c) if c.is_empty() || c == "_" => None,
-        Some(c) => Some(PathBuf::from(c)),
-        None => system_cache_dir().map(|c| c.join("arb-sys")),
+    let cache_dir = if env::var("DOCS_RS").is_ok() {
+         None
+    } else {
+        match env::var_os("ARB_SYS_CACHE") {
+            Some(ref c) if c.is_empty() || c == "_" => None,
+            Some(c) => Some(PathBuf::from(c)),
+            None => system_cache_dir().map(|c| c.join("arb-sys")),
+        }
     };
     let cache_dir = cache_dir
         .map(|cache| cache.join(&ARB_VER))

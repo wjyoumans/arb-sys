@@ -1,6 +1,6 @@
 [package]
 name = "arb-sys"
-version = "0.3.3"
+version = "0.3.4"
 authors = ["William Youmans <wyoumans@usf.edu>"]
 edition = "2018"
 description = "Bindings to the Arb library"
@@ -17,6 +17,7 @@ gmp-mpfr-sys = "1.4"
 flint-sys = { version = "0.7", features = ["disable-make-check"] }
 
 [features]
+default = ["disable-make-check"]
 disable-make-check = []
 
 [target.'cfg(target_os = "windows")'.build-dependencies.winapi]
