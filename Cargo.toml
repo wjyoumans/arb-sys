@@ -14,7 +14,7 @@ readme = "README.md"
 [dependencies]
 libc = "0.2"
 gmp-mpfr-sys = "1.4"
-flint-sys = { version = "0.6", features = ["disable-make-check"] }
+flint-sys = { version = "0.7", features = ["disable-make-check"] }
 
 [features]
 disable-make-check = []
