@@ -125,7 +125,7 @@ fn compile(env: &Environment) {
         remove_dir_or_panic(&env.build_dir);
         copy_dir_or_panic(&env.src_dir.join(ARB_DIR), &env.build_dir);
         build(env);
-        assert!(save_cache(env));
+        save_cache(env);
     }
     write_link_info(env);
 }
@@ -138,7 +138,7 @@ fn need_compile(env: &Environment) -> bool {
 
     if ok {
         if should_save_cache(env) {
-            assert!(save_cache(env));
+            save_cache(env);
         }
         return false;
     } else if load_cache(env) {
