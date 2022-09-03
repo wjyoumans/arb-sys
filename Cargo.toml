@@ -1,6 +1,6 @@
 [package]
 name = "arb-sys"
-version = "0.3.4"
+version = "0.3.5"
 authors = ["William Youmans <wyoumans@usf.edu>"]
 edition = "2018"
 description = "Bindings to the Arb library"
