@@ -11,7 +11,7 @@ use flint_sys::fmpz::fmpz;
 use libc::{c_char, c_int, FILE};
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct arb_struct {
     pub mid: arf_struct,
     pub rad: mag_struct,

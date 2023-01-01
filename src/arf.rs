@@ -2,6 +2,8 @@
 
 //! *See the [Arb documentation](https://arblib.org/).
 
+use derivative::Derivative;
+
 use flint_sys::deps::*;
 use flint_sys::flint::*;
 use flint_sys::fmpq::fmpq;
@@ -32,10 +34,12 @@ pub union mantissa_struct {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct arf_struct {
     pub exp: fmpz,
     pub size: mp_size_t,
+    #[derivative(Debug="ignore")]
     pub d: mantissa_struct,
 }
 
@@ -588,6 +592,7 @@ extern "C" {
     pub fn arf_get_d(x: *const arf_struct, rnd: c_int) -> f64;
     pub fn arf_set_d(x: *mut arf_struct, v: f64);
     pub fn arf_allocated_bytes(x: *const arf_struct) -> mp_limb_signed_t;
+    pub fn arf_get_str(x: *const arf_struct, n: mp_limb_signed_t) -> *mut c_char;
     pub fn arf_load_str(res: *mut arf_struct, data: *const c_char) -> c_int;
     pub fn arf_dump_str(x: *const arf_struct) -> *mut c_char;
     pub fn arf_load_file(res: *mut arf_struct, stream: *mut FILE) -> c_int;

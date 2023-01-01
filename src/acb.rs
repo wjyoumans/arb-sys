@@ -12,7 +12,7 @@ use flint_sys::fmpz::fmpz;
 use libc::{c_int, FILE};
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct acb_struct {
     pub real: arb_struct,
     pub imag: arb_struct,
